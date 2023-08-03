@@ -3,27 +3,34 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"dev": "vite dev",
-		"build": "vite build",
+		"dev": "npm run build:lang && vite dev",
+		"build": "npm run build:lang && vite build",
 		"preview": "vite preview",
 		"test": "npm run test:integration && npm run test:unit",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write .",
+		"build:lang": "lezer-generator ./src/lib/lang/lang.grammar -o ./src/lib/lang/lang.js",
 		"test:integration": "playwright test",
 		"test:unit": "vitest"
 	},
 	"dependencies": {
-		"codemirror": "^6.0.1"
+		"@codemirror/theme-one-dark": "^6.1.2",
+		"codemirror": "^6.0.1",
+		"collections": "^5.1.13",
+		"d3": "^7.8.5"
 	},
 	"devDependencies": {
+		"@lezer/generator": "^1.3.0",
 		"@playwright/test": "^1.28.1",
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.20.4",
+		"@types/codemirror": "5.60.8",
+		"@types/collections": "^5.1.2",
+		"@types/d3": "^7.4.0",
 		"@typescript-eslint/eslint-plugin": "^5.45.0",
 		"@typescript-eslint/parser": "^5.45.0",
-		"@types/codemirror": "5.60.8",
 		"eslint": "^8.28.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-svelte": "^2.30.0",
@@ -32,7 +39,7 @@
 		"svelte": "^4.0.0",
 		"svelte-check": "^3.4.3",
 		"tslib": "^2.4.1",
-		"typescript": "^5.0.0",
+		"typescript": "^5.1.6",
 		"vite": "^4.3.6",
 		"vitest": "^0.32.2"
 	},

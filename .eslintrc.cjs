@@ -10,12 +10,11 @@ module.exports = {
 	plugins: ['@typescript-eslint'],
 	parserOptions: {
 		sourceType: 'module',
-		ecmaVersion: 2020,
 		extraFileExtensions: ['.svelte']
 	},
 	env: {
 		browser: true,
-		es2017: true,
+		es2023: true,
 		node: true
 	},
 	overrides: [

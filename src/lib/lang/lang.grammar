@@ -1,0 +1,40 @@
+@top Program { OutputExpression }
+
+@skip { space | LineComment }
+
+@precedence {
+    seqBuilder @left
+}
+
+OutputExpression { "output" numExpression ("as" Str)?}
+
+numExpression {
+    NumSeq |
+    Dice |
+    Cards |
+    Num
+}
+
+strExpression {
+    Str
+}
+
+NumSeq { "{" numExpression? !seqBuilder ("," numExpression)* "}" }
+
+Dice { numExpression? !seqBuilder "d" numExpression }
+
+Cards { numExpression? !seqBuilder "c" numExpression }
+
+@skip {} {
+    Str { '"' strContent* '"' }
+}
+
+@tokens {
+    space { @whitespace+ }
+
+    LineComment {"//" ![\n]*}
+    
+    Num { @digit+ }
+
+    strContent { !["\n] }
+}

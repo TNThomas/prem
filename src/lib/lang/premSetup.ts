@@ -1,13 +1,14 @@
 import {keymap, highlightSpecialChars, drawSelection, highlightActiveLine, dropCursor,
     rectangularSelection, crosshairCursor,
     lineNumbers, highlightActiveLineGutter} from "@codemirror/view"
-import {type Extension, EditorState} from "@codemirror/state"
+import {type Extension, EditorState, Compartment} from "@codemirror/state"
 import {defaultHighlightStyle, syntaxHighlighting, indentOnInput, bracketMatching,
     foldGutter, foldKeymap} from "@codemirror/language"
 import {defaultKeymap, history, historyKeymap} from "@codemirror/commands"
 import {searchKeymap, highlightSelectionMatches} from "@codemirror/search"
 import {autocompletion, completionKeymap, closeBrackets, closeBracketsKeymap} from "@codemirror/autocomplete"
 import {lintKeymap} from "@codemirror/lint"
+import { prem } from "."
 
 // (The superfluous function calls around the list of extensions work
 // around current limitations in tree-shaking software.)
@@ -41,7 +42,11 @@ import {lintKeymap} from "@codemirror/lint"
 ///
 /// (You'll probably want to add some language package to your setup
 /// too.)
+
+const language = new Compartment
+
 export const premSetup: Extension = (() => [
+    language.of(prem()),
     lineNumbers(),
     highlightActiveLineGutter(),
     highlightSpecialChars(),
