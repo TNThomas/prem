@@ -1,6 +1,6 @@
 import type { TreeCursor } from '@lezer/common'
 import { Cards, Dice, type Sequence } from '../dataStructures'
-import { evalNumExpression } from "./numExpression"
+import { evalOrder1 } from "./order1"
 import { range } from 'd3'
 import { ErrorNodeError } from './errors'
 
@@ -20,12 +20,12 @@ function evalNode<T>(
         if (node.type.isError) {
             throw new ErrorNodeError(src, node, "Invalid face.")
         }
-        faces = evalNumExpression(src, node)
+        faces = evalOrder1(src, node)
         if (node.prevSibling()) {
             if (node.type.isError) {
                 throw new ErrorNodeError(src, node, "Invalid quantity.")
             }
-            quantity = evalNumExpression(src, node)
+            quantity = evalOrder1(src, node)
         }
         node.parent()
     }

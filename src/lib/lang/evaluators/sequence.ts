@@ -1,14 +1,15 @@
 import type { TreeCursor } from '@lezer/common'
 import { Sequence } from '../dataStructures'
-import { evalNumExpression } from "./numExpression"
+import { evalOrderLast } from "."
 import { ErrorNodeError } from './errors'
+import { sequence } from '@sveltejs/kit/hooks'
 
-export function evalNumSeq(src: string, node: TreeCursor): Sequence {
+export function evalSequence(src: string, node: TreeCursor): Sequence {
     if (node.firstChild()) {
         if (node.type.isError) {
             throw new ErrorNodeError(src, node, "Invalid item.")
         }
-        const firstElem = evalNumExpression(src, node)
+        const firstElem = evalOrderLast(src, node)
         let results: Sequence
         if (firstElem instanceof Sequence) {
             results = firstElem
@@ -21,7 +22,7 @@ export function evalNumSeq(src: string, node: TreeCursor): Sequence {
             if (node.type.isError) {
                 throw new ErrorNodeError(src, node, "Invalid item.")
             }
-            results.insert(evalNumExpression(src, node))         
+            results.insert(evalOrderLast(src, node))         
         }
 
         node.parent()
