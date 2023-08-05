@@ -1,8 +1,8 @@
 import type { TreeCursor } from '@lezer/common'
-import { Cards, Dice, type Sequence } from '../dataStructures'
-import { evalOrder1 } from "./order1/order1"
+import { Cards, Dice, type Sequence } from '../../dataStructures'
+import { evalOrder1 } from "."
 import { range } from 'd3'
-import { ErrorNodeError } from './errors'
+import { ErrorNodeError } from '../errors'
 
 export function evalEventSource(src: string, node: TreeCursor): Cards | Cards[] | Dice | Dice[] {
     return (node.type.name === "Cards" ? evalNode(src, node, Cards) : evalNode(src, node, Dice))
