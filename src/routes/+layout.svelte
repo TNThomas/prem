@@ -7,7 +7,8 @@
 
     const pages = {
         Calculator: "/",
-        Documentation: "/docs"
+        Documentation: "/docs",
+        "Change Log": "/changeLogs"
     }
 </script>
 
