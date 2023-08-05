@@ -1,8 +1,7 @@
 import type { TreeCursor } from '@lezer/common'
-import { Sequence } from '../dataStructures'
-import { evalOrderLast } from "."
-import { ErrorNodeError } from './errors'
-import { sequence } from '@sveltejs/kit/hooks'
+import { Sequence } from '../../dataStructures'
+import { evalOrderLast } from ".."
+import { ErrorNodeError } from '../errors'
 
 export function evalSequence(src: string, node: TreeCursor): Sequence {
     if (node.firstChild()) {

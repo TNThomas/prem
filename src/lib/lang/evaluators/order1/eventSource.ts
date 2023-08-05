@@ -1,6 +1,6 @@
 import type { TreeCursor } from '@lezer/common'
 import { Cards, Dice, type Sequence } from '../dataStructures'
-import { evalOrder1 } from "./order1"
+import { evalOrder1 } from "./order1/order1"
 import { range } from 'd3'
 import { ErrorNodeError } from './errors'
 

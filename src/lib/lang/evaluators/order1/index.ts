@@ -1,10 +1,10 @@
 import type { TreeCursor } from '@lezer/common'
-import { Sequence } from '../dataStructures/sequence'
+import { Sequence } from '../../dataStructures/sequence'
 import { evalNum } from './primitives'
 import { evalSequence } from './sequence'
-import { EvaluationError } from './errors'
+import { EvaluationError } from '../errors'
 import { evalEventSource } from './eventSource'
-import type { Cards, Dice } from '../dataStructures'
+import type { Cards, Dice } from '../../dataStructures'
 
 export function evalOrder1(
     src: string,

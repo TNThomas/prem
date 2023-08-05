@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { evalProgram } from ".";
+import { evalProgram } from "..";
 
 describe( "evalDice", () => {
 

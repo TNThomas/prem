@@ -1,6 +1,6 @@
 import type { TreeCursor } from '@lezer/common'
 import { Sequence} from '../dataStructures/sequence'
-import { evalStr } from './primitives'
+import { evalStr } from './order1/primitives'
 import { evalOrderLast } from '.'
 import { ErrorNodeError, EvaluationError } from './errors'
 
