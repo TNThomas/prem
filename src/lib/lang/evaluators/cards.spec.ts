@@ -4,7 +4,7 @@ import { Evaluator } from ".";
 describe( "evalCards", () => {
 
     test("parses basic syntax", () => {
-        const result = new Evaluator("output 2c4").eval()
+        const result = new Evaluator("output 2c4").evalProgram()
         expect(result).toEqual([
             {
                 name: "Output",
@@ -21,7 +21,7 @@ describe( "evalCards", () => {
     })
 
     test("assumes 1 when no quantity provided", () => {
-        const result = new Evaluator("output c10").eval()
+        const result = new Evaluator("output c10").evalProgram()
         expect(result).toEqual([
             {
                 name: "Output",
@@ -31,7 +31,7 @@ describe( "evalCards", () => {
     })
 
     test("composes with left precedence", () => {
-        const result = new Evaluator("output 1c2c4").eval()
+        const result = new Evaluator("output 1c2c4").evalProgram()
         expect(result).toEqual([
             {
                 name: "Output",
