@@ -3,6 +3,7 @@ import { fail } from '@sveltejs/kit';
 import { EvaluationError, Evaluator } from '$lib/lang/evaluators';
 import { dev } from '$app/environment';
 import type { ResultType } from '$lib/resultProcessing';
+import { ErrorNodeError } from '$lib/lang/evaluators/errors';
 
 export const actions = {
     calculate: async ({request, cookies}) => {
@@ -22,7 +23,7 @@ export const actions = {
         })
         const evaluator = new Evaluator(progStr)
         try {
-            const results = evaluator.eval()
+            const results = evaluator.evalProgram()
             cookies.set("results", JSON.stringify(results), {
                 path: '/',
                 httpOnly: true,
@@ -37,7 +38,7 @@ export const actions = {
                 collate: data.get("collate")?.toString()
             }
         } catch(exc) {
-            if (exc instanceof EvaluationError){
+            if (exc instanceof EvaluationError || exc instanceof ErrorNodeError){
                 return fail(400, {error: exc.toString()})
             }
             return fail(500, {error: (exc as Error).toString()})

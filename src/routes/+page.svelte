@@ -68,8 +68,8 @@
         {/each}
     </div>
 {:else}
-    {@debug form}
-    <p id="errorMsg">{form?.error}</p>
+    {@debug error}
+    <p id="errorMsg">{error}</p>
 {/if}
 
 <style>

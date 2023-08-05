@@ -1,7 +1,13 @@
 import type { TreeCursor } from '@lezer/common'
+import { EvaluationError } from './errors'
 
 export function evalNum(src:string, node: TreeCursor): number {
-    return parseInt(src.slice(node.from, node.to))
+    try{
+        return parseInt(src.slice(node.from, node.to))
+    } catch (error) {
+        throw new EvaluationError(src, node, "Not a Number.")
+    }
+    
 }
 
 export function evalStr(src: string, node: TreeCursor): string {

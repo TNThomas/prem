@@ -29,7 +29,7 @@
         <slot/>
     </main>
     <footer>
-        <p>version 0.2</p>
+        <p>version 0.3</p>
         <p>Created by Tabris Thomas</p>
     </footer>
 </ThemeContext>

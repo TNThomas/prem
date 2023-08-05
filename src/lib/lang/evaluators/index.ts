@@ -4,6 +4,7 @@ import { prem } from '..'
 export { EvaluationError } from "./errors"
 import { evalOutputExpression } from './outputExpression'
 import type { ResultType } from '$lib/resultProcessing'
+import { ErrorNodeError, EvaluationError } from './errors'
 
 const premLang = prem()
 
@@ -18,12 +19,25 @@ export class Evaluator {
         )
     }
 
-    eval(): ResultType[] {
+    evalProgram(): ResultType[] {
         const cursor = this.tree.cursor()
-        cursor.firstChild()
-        const result = evalOutputExpression(this.src, cursor)
-        console.log(result)
-        return [result]
+        if (cursor.firstChild()) {
+            if (cursor.type.isError) {
+                throw new ErrorNodeError(this.src, cursor)
+            }
+            const results = []
+            results.push(evalOutputExpression(this.src, cursor))
+            console.log(results[0])
+            while (cursor.nextSibling()) {
+                if (cursor.type.isError) {
+                    throw new ErrorNodeError(this.src, cursor)
+                }
+                results.push(evalOutputExpression(this.src, cursor))
+                console.log(results.at(-1))
+            }
+            return results
+        }
+        throw new EvaluationError(this.src, cursor)
     }
 
 }

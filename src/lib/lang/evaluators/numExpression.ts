@@ -2,7 +2,7 @@ import type { TreeCursor } from '@lezer/common'
 import { Sequence } from '../dataStructures/sequence'
 import { evalNum } from './primitives'
 import { evalNumSeq } from './numSeq'
-import { EvaluationError } from './errors'
+import { ErrorNodeError, EvaluationError } from './errors'
 import { evalEventSource } from './eventSource'
 import type { Cards, Dice } from '../dataStructures'
 
@@ -28,6 +28,6 @@ export function evalNumExpression(
             }
             return results
         default:
-            throw new EvaluationError(src, node, `Unrecognized node type in numeric expression: ${node.type.name}`)
+            throw new EvaluationError(src, node, `Expected a Number, Sequence, Dice, or Cards, but got ${node.type.name} instead.`)
     }
 }

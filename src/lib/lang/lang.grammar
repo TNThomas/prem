@@ -1,4 +1,4 @@
-@top Program { OutputExpression }
+@top Program { OutputExpression+ }
 
 @skip { space | LineComment }
 
@@ -6,7 +6,7 @@
     seqBuilder @left
 }
 
-OutputExpression { "output" numExpression ("as" Str)?}
+OutputExpression { "output" numExpression ("as" Str)? }
 
 numExpression {
     NumSeq |

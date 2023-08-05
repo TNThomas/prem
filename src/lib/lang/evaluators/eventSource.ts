@@ -2,6 +2,7 @@ import type { TreeCursor } from '@lezer/common'
 import { Cards, Dice, type Sequence } from '../dataStructures'
 import { evalNumExpression } from "./numExpression"
 import { range } from 'd3'
+import { ErrorNodeError } from './errors'
 
 export function evalEventSource(src: string, node: TreeCursor): Cards | Cards[] | Dice | Dice[] {
     return (node.type.name === "Cards" ? evalNode(src, node, Cards) : evalNode(src, node, Dice))
@@ -14,13 +15,21 @@ function evalNode<T>(
 ){
     let quantity: number | number[] | Sequence = 1,
         faces
+
     if (node.lastChild()) {
+        if (node.type.isError) {
+            throw new ErrorNodeError(src, node, "Invalid face.")
+        }
         faces = evalNumExpression(src, node)
         if (node.prevSibling()) {
+            if (node.type.isError) {
+                throw new ErrorNodeError(src, node, "Invalid quantity.")
+            }
             quantity = evalNumExpression(src, node)
         }
         node.parent()
     }
+
     if (quantity !== undefined && faces !== undefined) {
         if (typeof quantity === "number") {
             quantity = [quantity]
