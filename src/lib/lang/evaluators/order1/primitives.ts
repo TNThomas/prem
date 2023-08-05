@@ -1,5 +1,5 @@
 import type { TreeCursor } from '@lezer/common'
-import { EvaluationError } from './errors'
+import { EvaluationError } from '../errors'
 
 export function evalNum(src:string, node: TreeCursor): number {
     try{

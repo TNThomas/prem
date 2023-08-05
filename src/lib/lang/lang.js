@@ -2,15 +2,15 @@
 import {LRParser} from "@lezer/lr"
 export const parser = LRParser.deserialize({
   version: 14,
-  states: "%^OYQPOOO_QPO'#C_OOQO'#Ce'#CeQYQPOOOmQPO'#C`O_QPO'#CaO!RQPO,58yO_QPO'#CbOOQO'#Cl'#ClOOQO-E6c-E6cO_QPO'#CfO!dQPO,58zOOQO,58z,58zO!lQPO,58zOOQO,58{,58{O_QPO,58{O_QPO,58|O!zQPO1G.eOOQO,58|,58|O#PQPO,59QOOQO-E6d-E6dOOQO1G.f1G.fO#_QPO1G.fOOQO1G.g1G.gOOQO1G.h1G.hO#gOQO'#CdOOQO7+$P7+$POOQO7+$Q7+$QOOOO'#Cg'#CgO#oOQO,59OOOQO,59O,59OOOOO-E6e-E6eOOQO1G.j1G.j",
-  stateData: "#w~O^OSPOS~O_PO~OVWOaSOdTOeVO~OVWOaSObYOc[OdTOeVO~Od_Oe`OfaO[Ra_Ra~ObYOceO~ObYOceOd_Oe`O~OgiO~Od_Oe`ObYacYa~ObYOckO~OgnOhlO~OgpOhlO~O",
-  goto: "!oaPPPbfffPorx!SPPPP!YTQOR_WPSTVY_`RjaQRORXRQZSSdZfRf]QmiRomQUPQ]SQ^TQbVQcYQg_Rh`",
-  nodeNames: "⚠ LineComment Program OutputExpression NumSeq Dice Cards Num Str",
-  maxTerm: 24,
-  skippedNodes: [0,1],
+  states: "+jObQPOOOOQO'#Cr'#CrQbQPOOOgQPO'#C^OOQO-E6p-E6pO!OQQO,58xO!gQPO'#CfOOQO'#DV'#DVOgOPO'#CdOgOPO'#CjOOQO'#DT'#DTO!nQQO'#DSOOQO'#DS'#DSO#{QQO'#DROOQO'#DR'#DRO%zQQO'#DQOOQO'#DQ'#DQOOQO'#C}'#C}OgQPO'#CeOgQPO'#CgOgQPO'#ChOgQPO,58yOgQPO,58zOgQPO,59ROgQPO,59SO&[QPO1G.dO&aQQO,59QOOQO,59Q,59QO&uQQO'#CgOOQO,59O,59OOOQO,59U,59UOgQPO,58}OgQPO,59VOgQPO,59WOgQPO,58|OgQPO,59XOgQPO,58{OgQPO,59YOgQPO,59ZOgQPO,59[O'TQQO,59POOQO,59R,59ROOQO,59S,59SO'fQQO1G.eO(sQQO1G.fOOQO1G.m1G.mOOQO1G.n1G.nO*Q]SO'#CqOOQO7+$O7+$OO*YQPO1G.lOgQPO'#CsOOQO1G.l1G.lOOQO1G.i1G.iOOQO1G.q1G.qOOQO1G.r1G.rOOQO1G.h1G.hOOQO1G.s1G.sO*bQQO1G.gO+`QQO1G.tO,^QQO1G.uO-[QQO1G.vOOQO1G.k1G.kOO]O'#Ct'#CtO.Y]SO,59]OOQO,59],59]OOQO-E6q-E6qOOQO7+$W7+$WO.bQQO,59_OOQO1G.g1G.gOOQO1G.t1G.tOOQO1G.u1G.uOOQO1G.v1G.vOO]O-E6r-E6rOOQO1G.w1G.wOgQPO,58{OgQPO,59YOgQPO,59ZOgQPO,59[O.vQQO'#DQPgQPO,58yPgQPO,58z",
+  stateData: "/j~OlOSmOSnOS~OoOS~OpRO~O]VOxWOzbO|UO!PcO!QdO!RXO~OreOsfO!PgO!QhO![iOiQapQa~O!OkO~PgO!SoO!TpO!UqOivXpvXrvXsvX!PvX!QvX!RvX!VvX!WvX!XvX!YvX!ZvX![vX}vX!OvX{vX~O!RsO!VrOiuXpuXruXsuX!PuX!QuX!WuX!XuX!YuX!ZuX![uX}uX!OuX{uX!SuX!TuX!UuX~OitXptXrtXstX!PtX!QtX![tX}tX!OtX{tX~O!WtO!XuO!YvO!ZwO~P%YO!]!PO~OreOsfO}!SO!O!TO!PgO!QhO~OreOsfO!PgO!QhO~OreOsfO{!_O!PgO!QhO~O!PgO!QhOiRipRirRisRi![Ri}Ri!ORi{Ri!RRi!SRi!TRi!URi!VRi!WRi!XRi!YRi!ZRi~O!PgO!QhOiSipSirSisSi![Si}Si!OSi{Si!RSi!SSi!TSi!USi!VSi!WSi!XSi!YSi!ZSi~O!]!bO!^!`O~O}!SO!O!dO~O!WtO!XuO!YvO!ZwOiTipTirTisTi!PTi!QTi![Ti}Ti!OTi{Ti~O!WtO!XuO!YvO!ZwOibipbirbisbi!Pbi!Qbi![bi}bi!Obi{bi~O!WtO!XuO!YvO!ZwOicipcircisci!Pci!Qci![ci}ci!Oci{ci~O!WtO!XuO!YvO!ZwOidipdirdisdi!Pdi!Qdi![di}di!Odi{di~O!]!kO!^!`O~OreOsfO!PgO!QhO}ga!Oga~O!W!lO!X!mO!Y!nO!Z!oO!RtX!StX!TtX!UtX!VtX~P%YOm!T~",
+  goto: "*izPP{!P!P!n#]#z$i%W%W%W%WP$i#z#z#]!n!n!n%u%x&O&UPPPPPPPP&[PP!P'_(d)XP)vTPOQ!XaRUWXbcdefghopqrstuvw!S!l!m!n!o!q!r!X`RUWXbcdefghopqrstuvw!S!l!m!n!o!q!r!X^RUWXbcdefghopqrstuvw!S!l!m!n!o!q!r!X[RUWXbcdefghopqrstuvw!S!l!m!n!o!q!r!XYRUWXbcdefghopqrstuvw!S!l!m!n!o!q!r!XVRUWXbcdefghopqrstuvw!S!l!m!n!o!q!rR!QiQQORSQQ!RjR!c!RQ!a!PR!j!aQTRQjUnlWXopqrstuvw!l!m!n!oQxbQycQzdS{e!qS|f!rQ}gQ!OhR!e!Sf_RUWXbefopq!SQ!XrQ!YsQ!ZtQ![uQ!]vQ!^wQ!f!lQ!g!mQ!h!nQ!i!o]!pcdgh!q!r!Q]RUWXbcdefghrstuvw!S!l!m!n!o!q!rQ!UoQ!VpR!Wq!XZRUWXbcdefghopqrstuvw!S!l!m!n!o!q!r!SYRUbcdefghopqrstuvw!S!l!m!n!o!q!rQmWRnX",
+  nodeNames: "⚠ Program OutputExpression Eq Neq IsGreater Add Mult Not ParenExpression Sequence Dice Cards Num Negative Div Mod Sub IsLess IsGreaterEq IsLessEq Str",
+  maxTerm: 60,
+  skippedNodes: [0],
   repeatNodeCount: 3,
-  tokenData: "(p~R{OX#xXY#}YZ$tZ^#}^p#xpq#}qr#xrs%is|#x|}%n}!P#x!P!Q%u!Q![&f![#T#x#T#U&x#U#V#x#V#W'V#W#X'^#X#c#x#c#d'e#d#o#x#o#p([#p#q#x#q#r(c#r#y#x#y#z#}#z$f#x$f$g#}$g#BY#x#BY#BZ#}#BZ$IS#x$IS$I_#}$I_$I|#x$I|$JO#}$JO$JT#x$JT$JU#}$JU$KV#x$KV$KW#}$KW&FU#x&FU&FV#}&FV;'S#x;'S;=`(j<%lO#xQ#}OhQR$UY^PhQX^$tpq$t#y#z$t$f$g$t#BY#BZ$t$IS$I_$t$I|$JO$t$JT$JU$t$KV$KW$t&FU&FV$tP$yY^PX^$tpq$t#y#z$t$f$g$t#BY#BZ$t$IS$I_$t$I|$JO$t$JT$JU$t$KV$KW$t&FU&FV$t~%nOg~R%uObPhQR%zPhQ!P!Q%}P&SSPPOY%}Z;'S%};'S;=`&`<%lO%}P&cP;=`<%l%}R&mPVPhQ!Q![&pP&uPVP!Q![&pR&}PhQ#g#h'QP'VOfPR'^OePhQR'eOdPhQR'jPhQ#i#j'mP'pP#h#i'sP'vP#d#e'yP'|P#i#j(PP(SP#h#i(VP([O_PR(cOaPhQR(jOcPhQQ(mP;=`<%l#x",
-  tokenizers: [0, 1],
-  topRules: {"Program":[0,2]},
-  tokenPrec: 0
+  tokenData: "-e~R!WOX$kXY$pYZ&[Z^$p^p$kpq$pqr'Rrs'bsu$kuv'gvx$kxy'nyz'uz{'|{|(T|}([}!O(c!O!P$k!P!Q(j!Q![*^![!^$k!^!_*p!_!`+P!`!a+^!a#T$k#T#U+m#U#V$k#V#W+z#W#X,R#X#c$k#c#d,Y#d#o$k#o#p-P#p#q$k#q#r-W#r#y$k#y#z$p#z$f$k$f$g$p$g#BY$k#BY#BZ$p#BZ$IS$k$IS$I_$p$I_$I|$k$I|$JO$p$JO$JT$k$JT$JU$p$JU$KV$k$KV$KW$p$KW&FU$k&FU&FV$p&FV;'S$k;'S;=`-_<%lO$kS$pO!^SV$wYlR!^SX^%gpq%g#y#z%g$f$g%g#BY#BZ%g$IS$I_%g$I|$JO%g$JT$JU%g$KV$KW%g&FU&FV%gR%lYlRX^%gpq%g#y#z%g$f$g%g#BY#BZ%g$IS$I_%g$I|$JO%g$JT$JU%g$KV$KW%g&FU&FV%gV&cYoSlRX^%gpq%g#y#z%g$f$g%g#BY#BZ%g$IS$I_%g$I|$JO%g$JT$JU%g$KV$KW%g&FU&FV%gV'YPxP!^S!_!`']Q'bOsQ~'gO!]~U'nO!UQ!^ST'uOzP!^SU'|O{Q!^SU(TO!SQ!^SU([O!VQ!^SV(cO}R!^SV(jO!RR!^SV(qQ!^S!TQz{(w!P!Q)uR(zUO!b)^!c#X)^#Z#c)^#d;'S)^;'S;=`)o<%lO)^R)aPz{)dR)gP!P!Q)jR)oOnRR)rP;=`<%l)^R)zSmROY)uZ;'S)u;'S;=`*W<%lO)uR*ZP;=`<%l)uT*eP]P!^S!Q![*hP*mP]P!Q![*hU*wP!XQ!^S!_!`*zQ+PO!ZQU+UP!^S!_!`+XQ+^OrQU+eP!WQ!^S!_!`+hQ+mO!YQU+rP!^S#g#h+uQ+zO![QV,RO!QR!^SV,YO!PR!^SV,_P!^S#i#j,bR,eP#h#i,hR,kP#d#e,nR,qP#i#j,tR,wP#h#i,zR-POpRT-WO|P!^SV-_O!OR!^SS-bP;=`<%l$k",
+  tokenizers: [0, 1, 2],
+  topRules: {"Program":[0,1]},
+  tokenPrec: 667
 })
