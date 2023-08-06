@@ -11,7 +11,8 @@ export const versions: version[] = [
         [
             "This change log",
             "Improved error detection, handling, messages",
-            "Multiple outputs in a program"
+            "Multiple outputs in a program",
+            "Sequences no longer allowed to have empty elements, but the empty Sequence is still OK"
         ]
     ],
     [
