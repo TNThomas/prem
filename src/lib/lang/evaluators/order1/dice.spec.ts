@@ -1,10 +1,10 @@
 import { describe, expect, test } from "vitest";
-import { Evaluator } from ".";
+import { evalProgram } from "..";
 
 describe( "evalDice", () => {
 
     test("parses basic syntax", () => {
-        const result = new Evaluator("output 2d4").evalProgram()
+        const result = evalProgram("output 2d4")
         expect(result).toEqual([
             {
                 name: "Output",
@@ -25,7 +25,7 @@ describe( "evalDice", () => {
     })
 
     test("assumes 1 when no quantity provided", () => {
-        const result = new Evaluator("output d10").evalProgram()
+        const result = evalProgram("output d10")
         expect(result).toEqual([
             {
                 name: "Output",
@@ -35,7 +35,7 @@ describe( "evalDice", () => {
     })
 
     test("composes with left precedence", () => {
-        const result = new Evaluator("output 1d2d4").evalProgram()
+        const result = evalProgram("output 1d2d4")
         expect(result).toEqual([
             {
                 name: "Output",

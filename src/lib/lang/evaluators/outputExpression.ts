@@ -1,7 +1,7 @@
 import type { TreeCursor } from '@lezer/common'
 import { Sequence} from '../dataStructures/sequence'
-import { evalStr } from './primitives'
-import { evalNumExpression } from './numExpression'
+import { evalStr } from './order1/primitives'
+import { evalOrderLast } from '.'
 import { ErrorNodeError, EvaluationError } from './errors'
 
 export function evalOutputExpression(src: string, node: TreeCursor): {name: string, value: number[]} {
@@ -9,7 +9,7 @@ export function evalOutputExpression(src: string, node: TreeCursor): {name: stri
         if (node.type.isError) {
             throw new ErrorNodeError(src, node)
         }
-        let resultVal = evalNumExpression(src, node)
+        let resultVal = evalOrderLast(src, node)
         const resultName = node.nextSibling() ? evalStr(src, node): "Output"
         node.parent()
         if (typeof resultVal === "number") {
