@@ -1,19 +1,19 @@
 <script lang="ts">
 	import ExtraNav from "$lib/extraNav.svelte";
-    import { versions } from "./data";
+    import versions from "./changes.json"
 </script>
 
 <h2>Change Log</h2>
 <ExtraNav title="On This Page">
     {#each versions as version}
-        <li><a href="#{version[0]}">{version[0]}</a></li>
+        <li><a href="#{version.id}">{version.id}</a></li>
     {/each}
 </ExtraNav>
 {#each versions as version}
-    <input type="checkbox" id={version[0]}/>
-    <label for={version[0]}><h3>{version[0]} ({version[1].toDateString()})</h3></label>
+    <input type="checkbox" id={version.id}/>
+    <label for={version.id}><h3>{version.id} ({new Date(version.date).toDateString()})</h3></label>
     <article><ul>
-        {#each version[2] as bullet}
+        {#each version.changes as bullet}
             <li>{bullet}</li>
         {/each}
     </ul>
