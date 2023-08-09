@@ -1,24 +1,18 @@
-export type version = [
-    num: string,
-    releaseDate: Date,
-    notes: string[]
-]
-
-export const versions: version[] = [
-    [
-        "0.3",
-        new Date(),
-        [
+[
+    {
+        "id": "0.3",
+        "date": "2023-08-09",
+        "changes": [
             "This change log",
             "Improved error detection, handling, messages",
             "Multiple outputs in a program",
             "Sequences no longer allowed to have empty elements, but the empty Sequence is still OK"
         ]
-    ],
-    [
-        "0.2",
-        new Date("2023-08-04"),
-        [
+    },
+    {
+        "id": "0.2",
+        "date": "2023-08-04",
+        "changes": [
             "Parsing for single outputs of Numbers, Sequences, Dice, and Cards",
             "Collations for Exact, At Least, At Most",
             "Display as table or CSV data",
@@ -26,5 +20,5 @@ export const versions: version[] = [
             "Memory of last successfully-parsed program",
             "Adoption of color preference on page load"
         ]
-    ]
+    }
 ]
