@@ -1,7 +1,7 @@
 <script lang="ts">
     import { page } from '$app/stores';
-
 	import { prefersDark,  ThemeContext } from "$lib/themes";
+    import changeLog from "./changeLogs/changes.json"
 
     let darkMode = $prefersDark
 
@@ -30,7 +30,7 @@
         <slot/>
     </main>
     <footer>
-        <p>version 0.3</p>
+        <p>version {changeLog[0].id}</p>
         <p>Created by Tabris Thomas</p>
     </footer>
 </ThemeContext>
