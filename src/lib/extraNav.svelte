@@ -13,6 +13,7 @@
         position: fixed;
         top: 17em;
         left: 0;
+        width: 11rem
     }
 
     ol {
@@ -26,6 +27,7 @@
     @media only screen and (orientation: portrait) {
         nav {
             position: static;
+            width: auto;
         }
     }
 </style>

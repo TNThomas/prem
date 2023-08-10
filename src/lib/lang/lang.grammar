@@ -1,38 +1,93 @@
-@top Program { OutputExpression }
+@top Program { OutputExpression+ }
 
-@skip { space | LineComment }
+@skip { space | lineComment | blockComment }
 
 @precedence {
-    seqBuilder @left
+    seqBuilder @left, unary @left, math @left, comparison @left, equality @left
 }
 
-OutputExpression { "output" numExpression ("as" Str)?}
+OutputExpression { "output" orderLast ("as" Str)? }
 
-numExpression {
-    NumSeq |
-    Dice |
-    Cards |
+@skip {"\n"} {
+    Str { '"' strContent* '"' }
+}
+
+order1 {
+    ParenExpression { "(" orderLast ")" }
+    |
+    Sequence { 
+        ( "{" orderLast ("," orderLast)* "}" )
+        |
+        ( "{" "}" )
+    }
+    |
+    Dice { orderLast? !seqBuilder "d" orderLast }
+    |
+    Cards { orderLast? !seqBuilder "c" orderLast }
+    |
     Num
 }
 
-strExpression {
-    Str
+order2 {
+    Not |
+    Negative |
+    order1
 }
-
-NumSeq { "{" numExpression? !seqBuilder ("," numExpression)* "}" }
-
-Dice { numExpression? !seqBuilder "d" numExpression }
-
-Cards { numExpression? !seqBuilder "c" numExpression }
 
 @skip {} {
-    Str { '"' strContent* '"' }
+    Not { !unary "!" order1 }
+    
+    Negative { !unary "-" order1 }
 }
+
+order3 {
+    Mult { order2 !math "*" order3 }
+    |
+    Div { order2 !math "/" order3 }
+    |
+    Mod { order2 !math "%" order3 }
+    |
+    order2
+}
+
+order4 {
+    Add { order3 !math "+" order4 }
+    |
+    Sub { order3 !math "-" order4 }
+    |
+    order3
+}
+
+order5 {
+    IsGreater { order4 !comparison ">" order4 }
+    |
+    IsLess { order4 !comparison "<" order4 }
+    |
+    IsGreaterEq { order4 !comparison ">=" order4 }
+    |
+    IsLessEq { order4 !comparison "<=" order4 }
+    |
+    order4
+}
+
+order6 {
+    Eq { order6 !equality "==" order6 }
+    |
+    Neq { order6 !equality "!=" order6 }
+    |
+    order5
+}
+
+orderLast { order6 }
 
 @tokens {
     space { @whitespace+ }
 
-    LineComment {"//" ![\n]*}
+    lineComment {"//" ![\n]*}
+
+    blockComment {"/*" ![@eof] "*/"}
+
+    @precedence { lineComment, "/" }
     
     Num { @digit+ }
 

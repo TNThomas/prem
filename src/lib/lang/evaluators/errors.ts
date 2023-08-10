@@ -1,11 +1,22 @@
 import type { TreeCursor } from '@lezer/common'
 
+/**
+ * Base class for all errors raised by evaluation
+ */
 export class EvaluationError extends Error {
     constructor(src: string, node: TreeCursor, message?: string) {
-        let msg = `Could not evaluate ${node.type.name} ${src.slice(node.from, node.to)}`
-        if (message !== undefined) {
-            msg += ": " + message
-        }
-        super(msg)
+        const msg = `Failed to evaluate ${node.type.name} expression "${src.slice(node.from, node.to)}"`
+        super(msg + (message || "."))
+    }
+}
+
+/**
+ * The evaluator has encountered an Error node. 
+ */
+export class ErrorNodeError extends EvaluationError {
+    constructor(src: string, node: TreeCursor, detail?: string) {
+        const errText = src.slice(node.from, node.to)
+        node.parent()
+        super(src, node, ` at ${errText}` + (detail || "."))
     }
 }

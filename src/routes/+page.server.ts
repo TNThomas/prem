@@ -1,6 +1,6 @@
 import type { Actions, PageServerLoad } from './$types';
 import { fail } from '@sveltejs/kit';
-import { EvaluationError, Evaluator } from '$lib/lang/evaluators';
+import { EvaluationError, evalProgram } from '$lib/lang/evaluators';
 import { dev } from '$app/environment';
 import type { ResultType } from '$lib/resultProcessing';
 
@@ -20,9 +20,8 @@ export const actions = {
             secure: !dev,
             maxAge: 60 * 60 * 24 * 30
         })
-        const evaluator = new Evaluator(progStr)
         try {
-            const results = evaluator.eval()
+            const results = evalProgram(progStr)
             cookies.set("results", JSON.stringify(results), {
                 path: '/',
                 httpOnly: true,
