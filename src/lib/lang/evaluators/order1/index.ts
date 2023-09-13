@@ -2,6 +2,7 @@ import type { TreeCursor } from '@lezer/common'
 import { Sequence } from '../../dataStructures/sequence'
 import { evalNum } from './primitives'
 import { evalSequence } from './sequence'
+import { evalParenExpression } from './parenExpression'
 import { EvaluationError } from '../errors'
 import { evalEventSource } from './eventSource'
 import type { Cards, Dice } from '../../dataStructures'
@@ -17,6 +18,8 @@ export function evalOrder1(
             return evalNum(src, node)
         case "Sequence":
             return evalSequence(src, node)
+        case "ParenExpression":
+            return evalParenExpression (src, node)
         case "Cards":
         case "Dice":
             events = evalEventSource(src, node)
