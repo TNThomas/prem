@@ -5,30 +5,16 @@ import { dev } from '$app/environment';
 import type { ResultType } from '$lib/resultProcessing';
 
 export const actions = {
-    calculate: async ({request, cookies}) => {
+    calculate: async ({request}) => {
         const data = await request.formData()
         const program = data.get("program")
         // Evaluate the code
         if (program === null) {
             return fail(400, { program, missing: true })
         }
-        const progStr = program.toString()
-        cookies.set("program", progStr, {
-            path: '/',
-            httpOnly: true,
-            sameSite: 'strict',
-            secure: !dev,
-            maxAge: 60 * 60 * 24 * 30
-        })
+        const progStr: string = program.toString()
         try {
             const results = evalProgram(progStr)
-            cookies.set("results", JSON.stringify(results), {
-                path: '/',
-                httpOnly: true,
-                sameSite: 'strict',
-                secure: !dev,
-                maxAge: 60 * 60 * 24 * 30
-            })
             return {
                 program: progStr,
                 results: results,
