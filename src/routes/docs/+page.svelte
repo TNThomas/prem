@@ -52,6 +52,10 @@
         transition: opacity 0.25s linear 0.125s, font-size 0.125s linear;
     }
 
+    article :global(section) {
+        padding-left: 0.5em;
+    }
+
     article :global(code), article :global(pre), article :global(samp) {
         background-color: var(--theme-color-active, #e2f2ff);
         border: 1px solid var(--theme-color-line, #ddd);
