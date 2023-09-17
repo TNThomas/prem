@@ -7,9 +7,9 @@
     import { ExportView, TableView } from "$lib/resultViews"
 	import OptionBar from "./optionBar.svelte";
 	import ExtraNav from "$lib/extraNav.svelte";
+	import { programOut, programText } from "$lib/localData";
 	
     export let form: ActionData;
-    export let data: PageData;
 
     const views = {
             Table: TableView,
@@ -21,8 +21,8 @@
             "At Most": atMostCollation
         }
 
-    let formData = form?.program ? form.program : data.program,
-        chartData: ResultType[] = form?.results ? form.results : data.results,
+    let formData = form?.program ? form.program : $programText,
+        chartData: ResultType[] = form?.results ? form.results : $programOut,
         error: string | undefined = form?.error ? form.error : undefined,
         selectedView: keyof typeof views,
         selectedCollation: keyof typeof collations
@@ -33,9 +33,13 @@
         return async ({ result }) => {
             console.log("client result: " + result.type)
             // `result` is an `ActionResult` object
-            if (result.type === "success" && result.data && Array.isArray(result.data.results)) {
+            if (result.type === "success"
+                && result.data
+                && Array.isArray(result.data.results)
+                && typeof result.data.program === "string") {
                 error = undefined
-                chartData = result.data.results
+                $programText = result.data.program
+                chartData = $programOut = result.data.results
             }
             else if (result.type === "failure" && result.data && typeof result.data.error === "string") {
                 chartData = []
