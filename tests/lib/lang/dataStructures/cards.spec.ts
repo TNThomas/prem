@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
-import { Cards } from "./cards";
-import { Sequence } from "./sequence";
+import { Cards } from "$lib/lang/dataStructures/cards";
+import { Sequence } from "$lib/lang/dataStructures/sequence";
 
 describe("Cards", () => {
     test("are instantiable without suits", () => {
