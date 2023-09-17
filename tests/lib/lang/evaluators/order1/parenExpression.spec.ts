@@ -32,13 +32,16 @@ describe( "evalParenExpression", () => {
                     //2d4 can be any value between 2 and 8
                     //1d(2d4) thus is 1 die with a face for every possible result from 2d4 
                 value: [     
-                    2,      // 2d4 = 1, 1   
-                    3,      // 2d4 = 1, 2   
-                    4,      // 2d4 = 1, 3 and 2d4 = 2, 2
-                    5,      // 2d4 = 1, 4 and 2d4 = 2, 3
-                    6,      // 2d4 = 2, 4 and 2d4 = 3, 3
-                    7,      // 2d4 = 1, 3
-                    8,      // 2d4 = 4, 4
+                    2,      // 2d4 = 1, 1
+                    3, 3,   // 2d4 = 1, 2
+                    4, 4,   // 2d4 = 1, 3
+                    4,      // 2d4 = 2, 2
+                    5, 5,   // 2d4 = 1, 4
+                    5, 5,   // 2d4 = 2, 3
+                    6, 6,   // 2d4 = 2, 4
+                    6,      // 2d4 = 3, 3
+                    7, 7,   // 2d4 = 1, 3
+                    8       // 2d4 = 4, 4
                     ]
             }
         ])
@@ -53,14 +56,21 @@ describe( "evalParenExpression", () => {
                     // 1d2d4 results in the Sequence {1,2}d4
                     // the end result being the sequence {1d4,2d4}
                 value: [    
-                    1, 
-                    2,       
-                    3,         
-                    4,      
-                    5,      
-                    6,      
-                    7,      
-                    8,      
+                    1,      // 1d4 = 1
+                    2,      // 1d4 = 2  
+                    2,      // 2d4 = 1,1   
+                    3,      // 1d4 = 3
+                    3, 3,   // 2d4 = 1, 2      
+                    4,      // 1d4 = 4
+                    // everything beyond this point is the same as 2d4
+                    4, 4,   // 2d4 = 1, 3
+                    4,      // 2d4 = 2, 2
+                    5, 5,   // 2d4 = 1, 4 
+                    5, 5,   // 2d4 = 2, 3     
+                    6, 6,   // 2d4 = 2, 4
+                    6,      // 2d4 = 3, 3
+                    7, 7,   // 2d4 = 1, 3
+                    8       // 2d4 = 4, 4      
                     ]
             }
         ])
