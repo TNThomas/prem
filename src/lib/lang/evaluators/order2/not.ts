@@ -30,10 +30,21 @@ export function evalNot(src: string, node: TreeCursor): number| Sequence{
 
         // if the child is a sequence 
         if (child instanceof Sequence) {
-            // evalSequenceNot will create a sequence of 1's and 0's
-            let results: Sequence = evalSequeceNot(src, node);
+            // SequenceNot will take in the evaluated child sequence and return a sequence of 1's and 0's
+            //let results: Sequence = SequeceNot(child);
+
+            child.forEach(
+                (value: number, index: number, array: number[]) => {
+                    if(value == 0){
+                        array[index]=1;
+                    }else{
+                        array[index]=0;
+                    }
+                },
+                child)
+
             node.parent()
-            return results
+            return child;
              
         }
 
@@ -52,6 +63,27 @@ export function evalNot(src: string, node: TreeCursor): number| Sequence{
 
 // i only intend for evalSequenceNot to be used locally as the standard eval not calls it. 
 // im just doing this to keep my code from looking clutered
-function evalSequeceNot (src: string, node: TreeCursor): Sequence{
+//sequence not was a first attempt but looking over the sequence code i noticed i could just do a foreach
 
-}
+//function SequeceNot (seq: Sequence): Sequence{
+
+    // let results: Sequence
+
+    // evalSequence goes through the sequence and evaluates it out, if a value is 0 it becomes a 1, otherwise it becomes a 0, 
+    // if (seq.at(0) == 0){
+    //     results = new Sequence(1)
+    // } else {
+    //     results = new Sequence(0)
+    // }
+
+    // for(let i=1; i<seq.length; i++){
+    //     if (seq.at(i) == 0){
+    //         results.insert(1)
+    //     } else {
+    //         results.insert(0)
+    //     }
+    // }
+
+    // return results;  
+
+//}
