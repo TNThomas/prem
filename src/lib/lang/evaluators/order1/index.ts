@@ -31,6 +31,6 @@ export function evalOrder1(
             }
             return results
         default:
-            throw new EvaluationError(src, node, `Expected a Number, Sequence, Dice, or Cards, but got ${node.type.name} instead.`)
+            throw new EvaluationError(src, node, `Expected a Number, Sequence, Dice, Cards, or something in parentheses, but got ${node.type.name} instead.`)
     }
 }
