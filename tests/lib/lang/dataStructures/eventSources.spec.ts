@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest"
-import { DependentEventSource, IndependentEventSource } from "./eventSources"
-import { Sequence } from "./sequence"
+import { DependentEventSource, IndependentEventSource } from "$lib/lang/dataStructures/eventSources"
+import { Sequence } from "$lib/lang/dataStructures/sequence"
 
 describe( "IndependentEventSource", () => {
 

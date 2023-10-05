@@ -32,6 +32,12 @@ output 1d20</pre>
         <pre>output 2d2d6
 output &lbrace; 2, 3, 3, 4 &rbrace;d6
 output &lbrace; 2d6, 3d6, 3d6, 4d6 &rbrace;</pre>
+        <p>
+            This can be overriden using parentheses. Expressions in parentheses are evaluated first, just like in math. Consequently, the following are equivalent:
+        </p>
+        <pre>output 2d(2d6)
+output 4d6
+        </pre>
     </section>
 </section>
 <h4>Cards</h4>
@@ -39,7 +45,7 @@ output &lbrace; 2d6, 3d6, 3d6, 4d6 &rbrace;</pre>
     <p>Cards expressions look a lot like Dice expressions, except we use a 'c' instead of a 'd' </p>
     <pre>output 1c3 as "Blind 3-Card Monty"</pre>
     <p>Like with dice, we can omit the quantity to draw just one card from the deck.</p>
-    <pre>output 1c3 as "Still a blind 3-Card Monty"</pre>
+    <pre>output c3 as "Still a blind 3-Card Monty"</pre>
     <h5>Arbitrary Decks</h5>
     <section>
         <p>
@@ -47,8 +53,24 @@ output &lbrace; 2d6, 3d6, 3d6, 4d6 &rbrace;</pre>
         </p>
         <pre>output 2c&lbrace; 11, 11, 11, 11, 12, 12, 12, 12, 13, 13, 13, 13 &rbrace; as "2 face cards"</pre>
     </section>
+    <h5>Composing Card Expressions</h5>
+    <section>
+        <p>
+            Card expressions are evaluated left to right, so composing them results in dependent draws. Take for example the expression <code>2c2c6</code>. PREM first computes the possible results of <code>2c2</code>. Then for each result (<samp>&lbrace; 3, 3 &rbrace;</samp>), computes the result of drawing that many cards from a deck of 6. Consequently, the following are equivalent:
+        </p>
+        <pre>output 2c2c6
+output &lbrace; 3, 3 &rbrace;c6
+output 3c6</pre>
+        <p>
+            Like with dice, we can override this behavior with parentheses:
+        </p>
+        <pre>output 2c(3c6) as "choose 2 cards at random from a hand of 3 drawn from a deck of 6."</pre>
+    </section>
     <h5>Shuffling Cards</h5>
     <section>
-        
+        <p>
+            When drawing more cards than are present in a deck, the deck is shuffled when emptied. Drawing then resumes until the specified number of cards are drawn.
+        </p>
+        <pre>output 4c3 as "Draw all 3 cards, shuffle, then draw 1 more card."</pre>
     </section>
 </section>

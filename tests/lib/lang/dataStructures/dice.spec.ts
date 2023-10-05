@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
-import { Dice } from "./dice";
-import { Sequence } from "./sequence";
+import { Dice } from "$lib/lang/dataStructures/dice";
+import { Sequence } from "$lib/lang/dataStructures/sequence";
 
 describe( "Dice", () => {
 
