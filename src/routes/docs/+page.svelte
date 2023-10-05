@@ -53,7 +53,7 @@
     }
 
     article :global(code), article :global(pre), article :global(samp) {
-        background-color: var(--theme-color-active, #e2f2ff);
+        background-color: var(--theme-color-box, #e2f2ff);
         border: 1px solid var(--theme-color-line, #ddd);
         border-radius: 2px;
         padding: 0 2px;
