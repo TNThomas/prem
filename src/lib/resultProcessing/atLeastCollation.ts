@@ -5,7 +5,7 @@ export function atLeastCollation(raw: ResultType): Collation {
     let prev = 0
     for (const result of [...collation.data.keys()].reverse()) {
         prev += collation.data.get(result) || 0
-        collation.data.set(result, prev)
+        collation.data.set(result, Math.min(prev, 1))
     }
     return collation
 }
