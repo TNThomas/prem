@@ -3,10 +3,6 @@ export const
   Program = 1,
   OutputExpression = 2,
   Not = 8,
-  ParenExpression = 9,
-  Sequence = 10,
-  Dice = 11,
-  Cards = 12,
-  Num = 13,
-  Negative = 14,
+  Num = 11,
+  Negative = 12,
   Str = 21

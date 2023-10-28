@@ -23,6 +23,7 @@ export const actions = {
             }
         } catch(exc) {
             if (exc instanceof EvaluationError){
+                console.log(exc.src)
                 return fail(400, {error: exc.toString()})
             }
             return fail(500, {error: (exc as Error).toString()})

@@ -1,6 +1,6 @@
-import { evalOrder1 } from "./order1"
+import { evalOrder3 } from "./order3"
 
 export * from "./errors"
 export { evalProgram } from "./program"
 
-export const evalOrderLast = evalOrder1
+export const evalOrderLast = evalOrder3

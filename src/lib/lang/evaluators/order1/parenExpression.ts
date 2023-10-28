@@ -1,21 +1,22 @@
 import type { TreeCursor } from '@lezer/common'
 import type { Sequence } from '../../dataStructures'
 import { evalOrderLast } from ".."
-import { ErrorNodeError } from '../errors'
+import { ErrorNodeError, EvaluationError } from '../errors'
 
 
 export function evalParenExpression(src: string, node: TreeCursor): number | Sequence{
-
     // there is only one child within the parentheses
-    let results: number|Sequence = 0
-
-    if (node.firstChild()) { // context manager wherein `node` is the first child
+    let result: number | Sequence
+    if (node.firstChild()) {
         if (node.type.isError) {
-                throw new ErrorNodeError(src, node)
+            throw new ErrorNodeError(src, node, "EvaluatorError.")
         }
         // we just evaluate the contents of the parentheses as normal using evalOrderLast 
-        results = evalOrderLast(src, node)
-        node.parent() // return `node` to its original state before we leave the context
+        result = evalOrderLast(src, node)
+        // because node.firstChild sets node to the first child, we have to re-set it to the parent here before returning our result
+        node.parent()
+    } else {
+        throw new EvaluationError(src, node)
     }
-    return results
+    return result
 }
