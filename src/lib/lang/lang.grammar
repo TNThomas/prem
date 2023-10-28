@@ -3,7 +3,7 @@
 @skip { space | lineComment | blockComment }
 
 @precedence {
-    seqBuilder @left, unary @left, math @left, comparison @left, equality @left
+    seqBuilder @cut, unary @left, math @left, comparison @left, equality @left
 }
 
 OutputExpression { "output" orderLast ("as" Str)? }
@@ -21,10 +21,6 @@ order1 {
         ( "{" "}" )
     }
     |
-    Dice { orderLast? !seqBuilder "d" orderLast }
-    |
-    Cards { orderLast? !seqBuilder "c" orderLast }
-    |
     Num
 }
 
@@ -40,45 +36,57 @@ order2 {
     Negative { !unary "-" order1 }
 }
 
+eventSource<order> {
+    Dice { order? "d" order2 }
+    |
+    Cards { order? "c" order2 }
+}
+
 order3 {
-    Mult { order2 !math "*" order3 }
-    |
-    Div { order2 !math "/" order3 }
-    |
-    Mod { order2 !math "%" order3 }
+    eventSource<order3>
     |
     order2
 }
 
 order4 {
-    Add { order3 !math "+" order4 }
+    Mult { order3 !math "*" order4 }
     |
-    Sub { order3 !math "-" order4 }
+    Div { order3 !math "/" order4 }
+    |
+    Mod { order3 !math "%" order4 }
     |
     order3
 }
 
 order5 {
-    IsGreater { order4 !comparison ">" order4 }
+    Add { order4 !math "+" order5 }
     |
-    IsLess { order4 !comparison "<" order4 }
-    |
-    IsGreaterEq { order4 !comparison ">=" order4 }
-    |
-    IsLessEq { order4 !comparison "<=" order4 }
+    Sub { order4 !math "-" order5 }
     |
     order4
 }
 
 order6 {
-    Eq { order6 !equality "==" order6 }
+    IsGreater { order5 !comparison ">" order5 }
     |
-    Neq { order6 !equality "!=" order6 }
+    IsLess { order5 !comparison "<" order5 }
+    |
+    IsGreaterEq { order5 !comparison ">=" order5 }
+    |
+    IsLessEq { order5 !comparison "<=" order5 }
     |
     order5
 }
 
-orderLast { order6 }
+order7 {
+    Eq { order6 !equality "==" order6 }
+    |
+    Neq { order6 !equality "!=" order6 }
+    |
+    order6
+}
+
+orderLast { order7 }
 
 @tokens {
     space { @whitespace+ }

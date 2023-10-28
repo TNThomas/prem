@@ -3,6 +3,6 @@ export const
   Program = 1,
   OutputExpression = 2,
   Not = 8,
-  Num = 13,
-  Negative = 14,
+  Num = 11,
+  Negative = 12,
   Str = 21
