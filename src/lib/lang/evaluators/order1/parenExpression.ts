@@ -3,7 +3,6 @@ import type { Sequence } from '../../dataStructures'
 import { evalOrderLast } from ".."
 import { ErrorNodeError, EvaluationError } from '../errors'
 
-
 export function evalParenExpression(src: string, node: TreeCursor): number | Sequence{
     // there is only one child within the parentheses
     let result: number | Sequence
