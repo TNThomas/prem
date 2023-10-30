@@ -42,6 +42,12 @@ eventSource<order> {
     Cards { order? "c" order2 }
 }
 
+eventSource<order> {
+    Dice { order? "d" order2 }
+    |
+    Cards { order? "c" order2 }
+}
+
 order3 {
     eventSource<order3>
     |

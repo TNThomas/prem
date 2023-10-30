@@ -3,7 +3,6 @@ import type { Sequence } from '../../dataStructures'
 import { evalOrderLast } from ".."
 import { ErrorNodeError, EvaluationError } from '../errors'
 
-    //for the paren expression just go through everything within the parentheses and evaluate it FIRST before evaluating other things
 export function evalParenExpression(src: string, node: TreeCursor): number | Sequence{
     // there is only one child within the parentheses
     let result: number | Sequence

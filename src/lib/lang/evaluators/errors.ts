@@ -19,6 +19,6 @@ export class ErrorNodeError extends EvaluationError {
     constructor(src: string, node: TreeCursor, detail?: string) {
         const errText = src.slice(node.from, node.to)
         node.parent()
-        super(src, node, `Error encountered at ${errText}.` + ((" " + detail) || ""))
+        super(src, node, ` at ${errText}. ` + detail)
     }
 }

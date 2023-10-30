@@ -7,10 +7,12 @@ const premParser = parser.configure({
     props: [
         styleTags({
             Num: t.integer,
-            String: t.string,
+            "Str/...": t.string,
             LineComment: t.lineComment,
             "{ }": t.bracket,
-            "Seq Die Cards": t.list,
+            ParenExpression: t.paren,
+            "Cards/...": t.list,
+            "Sequence Dice/...": t.list, 
             OutputExpression: t.controlKeyword
         }),
         indentNodeProp.add({

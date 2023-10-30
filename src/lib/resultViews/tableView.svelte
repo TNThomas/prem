@@ -51,7 +51,7 @@
     }
 
     .barFill {
-        background-color: var(--theme-color-active, #e2f2ff);
+        background-color: var(--theme-color-line, #e2f2ff);
     }
 
     .barFill > p {
