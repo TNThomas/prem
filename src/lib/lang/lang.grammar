@@ -31,9 +31,9 @@ order2 {
 }
 
 @skip {} {
-    Not { !unary "!" order1 }
+    Not { !unary "!" Negative? order1 }
     
-    Negative { !unary "-" order1 }
+    Negative { !unary "-" Not? order1 }
 }
 
 eventSource<order> {
