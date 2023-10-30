@@ -1,22 +1,19 @@
 import type { TreeCursor } from '@lezer/common'
-import { Sequence } from '../../dataStructures/sequence'
-import { EvaluationError } from '../errors'
-import { evalOrder1 } from '../order1/index'
+import type { Sequence } from '$lib/lang/dataStructures'
+import { evalNegative } from './negative'
 import { evalNot } from './not'
+import { evalOrder1 } from "../order1"
 
 export function evalOrder2(
     src: string,
     node: TreeCursor
 ): number | Sequence {
-
-    // i have to keep thiis or else i get an error
-    const results = new Sequence()
-
      switch (node.type.name) {
          case "Not":
              return evalNot(src, node)
+        case "Negative":
+            return evalNegative(src, node)
         default:
-            // if we dont find something of order2 we check up the order at order1
-            return evalOrder1(src,node)
+            return evalOrder1(src, node)
     }
 }

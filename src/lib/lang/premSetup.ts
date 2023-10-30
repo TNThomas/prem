@@ -2,12 +2,13 @@ import {keymap, highlightSpecialChars, drawSelection, highlightActiveLine, dropC
     rectangularSelection, crosshairCursor,
     lineNumbers, highlightActiveLineGutter} from "@codemirror/view"
 import {type Extension, EditorState, Compartment} from "@codemirror/state"
-import {defaultHighlightStyle, syntaxHighlighting, indentOnInput, bracketMatching,
+import {syntaxHighlighting, indentOnInput, bracketMatching,
     foldGutter, foldKeymap} from "@codemirror/language"
 import {defaultKeymap, history, historyKeymap} from "@codemirror/commands"
 import {searchKeymap, highlightSelectionMatches} from "@codemirror/search"
 import {autocompletion, completionKeymap, closeBrackets, closeBracketsKeymap} from "@codemirror/autocomplete"
 import {lintKeymap} from "@codemirror/lint"
+import {classHighlighter} from "@lezer/highlight"
 import { prem } from "."
 
 // (The superfluous function calls around the list of extensions work
@@ -56,7 +57,7 @@ export const premSetup: Extension = (() => [
     dropCursor(),
     EditorState.allowMultipleSelections.of(true),
     indentOnInput(),
-    syntaxHighlighting(defaultHighlightStyle, {fallback: true}),
+    syntaxHighlighting(classHighlighter, {fallback: true}),
     bracketMatching(),
     closeBrackets(),
     autocompletion(),
