@@ -1,20 +1,14 @@
 <script lang="ts">
-    import { Compartment} from "@codemirror/state"
-	import { hsl } from "d3";
-    import { afterUpdate, getContext, onMount } from 'svelte';
+    import { onMount } from 'svelte';
 
     import { EditorView, premSetup } from '$lib/lang/premSetup'
-	import type { Theme } from "$lib/themes";
-
+		
     export let formElement: string | null = null
-    //export let formSubmitter: HTMLButtonElement | HTMLInputElement
     export let formData: string | null = null
     
     let editorContainer: HTMLLabelElement,
         editorFormField: HTMLTextAreaElement,
-        editor: EditorView,
-        theme = new Compartment,
-        themeColors = getContext("theme") as Theme
+        editor: EditorView
 
     onMount(() => {
         editorFormField.style.display = "none"
@@ -23,7 +17,6 @@
             doc: editorFormField.placeholder,
             extensions: [
                 premSetup,
-                theme.of(EditorView.baseTheme({})),
                 EditorView.updateListener.of((e) => {
                     editorFormField.value = editor.state.doc.toString()
                 })
@@ -31,32 +24,6 @@
             parent: editorContainer
         })
     });
-
-    function updateFormField() {
-        editorFormField.value = editor.state.doc.toString()
-    }
-
-    function retheme(colors: Theme) {
-        if (editor !== undefined) {
-            editor.dispatch({
-                effects: theme.reconfigure(
-                    EditorView.theme(
-                        {
-                            ".cm-gutters": {
-                                borderRight: `1px solid ${themeColors.line}`
-                            }
-                        },
-                        {dark:hsl(themeColors.bg).l <= 0.5}
-                    )
-                )
-            });
-        }
-    }
-
-    afterUpdate(() => {
-        retheme(themeColors)
-    })
-
 </script>
 
 <label bind:this={editorContainer} for="editorFormField">
@@ -77,11 +44,34 @@
 
     textarea {
         width: calc(100% - 5px);
+        background-color: var(--theme-color-bg, white);
+        color: var(--theme-color-text, black);
     }
 
     @media only screen and (orientation: landscape) {
         :global(.cm-editor) {
             height: 33vh;
         }
+    }
+
+    label :global(.cm-gutters) {
+        background-color: var(--theme-color-box);
+        border-right-color: var(--theme-color-line);
+    }
+
+    label :global(.tok-keyword) {
+        color: var(--theme-editor-kw, var(--theme-color-text));
+    }
+
+    label :global(.tok-number) {
+        color: var(--theme-editor-num, var(--theme-color-text));
+    }
+
+    label :global(.tok-string) {
+        color: var(--theme-editor-str, var(--theme-color-text));
+    }
+
+    label :global(.cm-matchingBracket) {
+        color: var(--theme-editor-bracket, var(--theme-color-text));
     }
 </style>
