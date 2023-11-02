@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
 import { evalProgram } from "$lib/lang/evaluators";
 
-describe( "evalParenExpression", () => {
+describe( "evalNotExpression", () => {
 
 
     test("!0 returns a 1", () => {
