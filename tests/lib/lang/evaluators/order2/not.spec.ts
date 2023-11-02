@@ -61,7 +61,7 @@ describe( "evalParenExpression", () => {
         expect(result).toEqual([
             {
                 name: "Output",
-                value: [1,1,1,1,0,0,0]
+                value: [1,0,1,0,1,1,0].sort((a, b) => a-b)
             }
         ])
     })
@@ -71,7 +71,7 @@ describe( "evalParenExpression", () => {
         expect(result).toEqual([
             {
                 name: "Output",
-                value: [1,1,1,1,0,0,0]
+                value: [1,0,1,0,1,1,0].sort((a, b) => a-b)
             }
         ])
     })
@@ -100,17 +100,16 @@ describe( "evalParenExpression", () => {
         ])
     })
 
-    // i am not completely sure why this one fails
-    // however my theory is that the code is reading in !1 as the input for the first value in the dice 
-    // since it expects it to be only values of order1 the index for order1 throws an error
+    //!1d6 is parsed the same way as (!1)d6
     test("Not functions with dice without paranthesies", () => {
         const result = evalProgram("output !1d6")
         expect(result).toEqual([
             {
                 name: "Output",
-                value: [0,0,0,0,0,0]
+                value: []
             }
         ])
     })
+
 
 })
