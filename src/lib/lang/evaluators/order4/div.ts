@@ -1,7 +1,6 @@
 import type { TreeCursor } from '@lezer/common'
 import { Sequence } from "$lib/lang/dataStructures"
 import { ErrorNodeError, EvaluationError } from ".."
-import { evalOrder1 } from "../order1"
 import { evalOrder3 } from "../order3"
 import { evalOrder4 } from "."
 //import { evalOrderLast } from ".."
