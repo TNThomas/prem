@@ -25,27 +25,23 @@ order1 {
 }
 
 order2 {
-    Not |
-    Negative |
+    Dice { order2? "d" order1 }
+    |
+    Cards { order2? "c" order1 }
+    |
     order1
 }
 
-@skip {} {
-    Not { !unary "!" Negative? order1 }
-    
-    Negative { !unary "-" Not? order1 }
-}
-
-eventSource<order> {
-    Dice { order? "d" order2 }
-    |
-    Cards { order? "c" order2 }
-}
-
 order3 {
-    eventSource<order3>
-    |
+    Not |
+    Negative |
     order2
+}
+
+@skip { blockComment } {
+    Not { !unary "!" (Negative | order2) }
+    
+    Negative { !unary "-" (Not | order2) }
 }
 
 order4 {
