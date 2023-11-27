@@ -24,6 +24,13 @@ describe( "evalDice", () => {
         ])
     })
 
+    test("Disallows spaces in basic syntax", () => {
+        const result1 = () => evalProgram("output 2d 4")
+        expect(result1).toThrowError()
+        const result2 = () => evalProgram("output 2 d4")
+        expect(result2).toThrowError()
+    })
+
     test("assumes 1 when no quantity provided", () => {
         const result = evalProgram("output d10")
         expect(result).toEqual([

@@ -10,7 +10,16 @@ export function evalOutputExpression(src: string, node: TreeCursor): {name: stri
             throw new ErrorNodeError(src, node)
         }
         let resultVal = evalOrderLast(src, node)
-        const resultName = node.nextSibling() ? evalStr(src, node): "Output"
+        let resultName = "Output"
+        if (node.nextSibling()) {
+            if (node.type.isError) {
+                throw new ErrorNodeError(src, node)
+            }
+            if (node.type.name !== "Str") {
+                throw new EvaluationError(src, node)
+            }
+            resultName = evalStr(src, node)
+        }
         node.parent()
         if (typeof resultVal === "number") {
             resultVal = new Sequence(resultVal)
