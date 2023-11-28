@@ -2,8 +2,8 @@ import type { TreeCursor } from '@lezer/common'
 import { Cards, Dice, type Sequence } from '../../dataStructures'
 import { range } from 'd3'
 import { ErrorNodeError } from '../errors'
-import { evalOrder3 } from '.'
-import { evalOrder2 } from '../order2'
+import { evalOrder2 } from '.'
+import { evalOrder1 } from '../order1'
 
 export function evalEventSource(src: string, node: TreeCursor): Cards | Cards[] | Dice | Dice[] {
     return (node.type.name === "Cards" ? evalNode(src, node, Cards) : evalNode(src, node, Dice))
@@ -21,12 +21,12 @@ function evalNode<T>(
         if (node.type.isError) {
             throw new ErrorNodeError(src, node, "Invalid face.")
         }
-        faces = evalOrder2(src, node)
+        faces = evalOrder1(src, node)
         if (node.prevSibling()) {
             if (node.type.isError) {
                 throw new ErrorNodeError(src, node, "Invalid quantity.")
             }
-            quantity = evalOrder3(src, node)
+            quantity = evalOrder2(src, node)
         }
         node.parent()
     }
