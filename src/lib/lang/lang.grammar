@@ -1,89 +1,87 @@
 @top Program { OutputExpression+ }
 
-@skip { space | lineComment | blockComment }
+@skip { lineComment | blockComment }
 
 @precedence {
-    seqBuilder @cut, unary @left, math @left, comparison @left, equality @left
+     spacedOp @left, comparison @left, equality @left
 }
 
-OutputExpression { "output" orderLast ("as" Str)? }
+OutputExpression { "output" space orderLast (space "as" space Str)? }
 
 @skip {"\n"} {
     Str { '"' strContent* '"' }
 }
 
 order1 {
-    ParenExpression { "(" orderLast ")" }
+    ParenExpression { "(" space? orderLast space? ")" }
     |
     Sequence { 
-        ( "{" orderLast ("," orderLast)* "}" )
+        ( "{" space? orderLast space? ("," space? orderLast space? )* "}" )
         |
-        ( "{" "}" )
+        ( "{" space? "}" )
     }
     |
     Num
 }
 
 order2 {
-    Not |
-    Negative |
+    Dice { order2? "d" order1 }
+    |
+    Cards { order2? "c" order1 }
+    |
     order1
 }
 
-@skip {} {
-    Not { !unary "!" Negative? order1 }
-    
-    Negative { !unary "-" Not? order1 }
-}
-
-eventSource<order> {
-    Dice { order? "d" order2 }
-    |
-    Cards { order? "c" order2 }
-}
-
 order3 {
-    eventSource<order3>
+    Not
+    |
+    Negative
     |
     order2
 }
 
+Not { "!" (Negative | order2) }
+
+Negative { "-" (Not | order2) }
+
+spaceBefore<expr> { space? expr }
+
 order4 {
-    Mult { order3 !math "*" order4 }
+    Mult { order3 spaceBefore<"*" space? order4> }
     |
-    Div { order3 !math "/" order4 }
+    Div { order3 spaceBefore<"/" space? order4> }
     |
-    Mod { order3 !math "%" order4 }
+    Mod { order3 spaceBefore<"%" space? order4> }
     |
-    order3
+    order3 !spacedOp
 }
 
 order5 {
-    Add { order4 !math "+" order5 }
+    Add { order4 spaceBefore<"+" space? order5> }
     |
-    Sub { order4 !math "-" order5 }
+    Sub { order4 spaceBefore<"-" space? order5> }
     |
-    order4
+    order4 !spacedOp
 }
 
 order6 {
-    IsGreater { order5 !comparison ">" order5 }
+    IsGreater { order5 !comparison space? ">" space? order5 }
     |
-    IsLess { order5 !comparison "<" order5 }
+    IsLess { order5 !comparison space? "<" space? order5 }
     |
-    IsGreaterEq { order5 !comparison ">=" order5 }
+    IsGreaterEq { order5 !comparison space? ">=" space? order5 }
     |
-    IsLessEq { order5 !comparison "<=" order5 }
+    IsLessEq { order5 !comparison space? "<=" space? order5 }
     |
-    order5
+    order5 !spacedOp
 }
 
 order7 {
-    Eq { order6 !equality "==" order6 }
+    Eq { order6 !equality space? "==" space? order6 }
     |
-    Neq { order6 !equality "!=" order6 }
+    Neq { order6 !equality space? "!=" space? order6 }
     |
-    order6
+    order6 !spacedOp
 }
 
 orderLast { order7 }
