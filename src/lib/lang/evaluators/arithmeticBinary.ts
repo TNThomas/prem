@@ -1,11 +1,15 @@
 import type { TreeCursor } from '@lezer/common'
 import { Sequence } from "$lib/lang/dataStructures"
-import { ErrorNodeError, EvaluationError } from ".."
-import { evalOrder3 } from "../order3"
-import { evalOrder4 } from "../order4"
+import { ErrorNodeError, EvaluationError, applyOperator } from "."
 import { cross } from 'd3'
 
-export function evalMult(src: string, node: TreeCursor): number | Sequence {
+export function evalArithmeticBinary(
+    src: string,
+    node: TreeCursor,
+    operator: (a: number, b: number) => number,
+    leftEvaluator: (src: string, node: TreeCursor) => number | Sequence,
+    rightEvaluator: (src: string, node: TreeCursor) => number | Sequence
+): number | Sequence {
 
     let first: number | Sequence | undefined, second: number | Sequence | undefined
 
@@ -13,14 +17,14 @@ export function evalMult(src: string, node: TreeCursor): number | Sequence {
         if (node.type.isError) {
             throw new ErrorNodeError(src, node, "Invalid first value.")
         }
-        first = evalOrder3(src, node)
+        first = leftEvaluator(src, node)
     
 
         if (node.nextSibling()) {
             if (node.type.isError) {
                 throw new ErrorNodeError(src, node, "Invalid second value.")
             }         
-            second = evalOrder4(src, node)
+            second = rightEvaluator(src, node)
         }
         node.parent()
     }
@@ -28,7 +32,7 @@ export function evalMult(src: string, node: TreeCursor): number | Sequence {
     if (first !== undefined && second !== undefined) {
         // Return a Num when both inputs are Nums
         if (typeof first === "number" && typeof second === "number") {
-            return multiply(first, second)
+            return applyOperator(operator, first, second)
         }
 
         // Ensure first is a sequence so we can do sequence stuff
@@ -40,14 +44,9 @@ export function evalMult(src: string, node: TreeCursor): number | Sequence {
         return new Sequence(...cross(
             first,
             second,
-            multiply
+            (a: number, b: number) => applyOperator(operator, a, b)
         ))
     }
+
     throw new EvaluationError(src, node, "Cannot multiply values that are neither Number nor Sequence.")
-
-}
-
-function multiply(a: number, b: number) {
-    const product = a * b
-    return product === 0 ? 0 : product
 }
