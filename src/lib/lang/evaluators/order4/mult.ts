@@ -1,14 +1,13 @@
 import type { TreeCursor } from '@lezer/common'
 import { Sequence } from "$lib/lang/dataStructures"
 import { ErrorNodeError, EvaluationError } from ".."
-import { evalOrder1 } from "../order1"
 import { evalOrder3 } from "../order3"
 import { evalOrder4 } from "../order4"
-import { evalOrderLast } from ".."
+import { cross } from 'd3'
 
 export function evalMult(src: string, node: TreeCursor): number | Sequence {
 
-    let first: number | Sequence, second: number | Sequence
+    let first: number | Sequence | undefined, second: number | Sequence | undefined
 
     if (node.firstChild()) {
         if (node.type.isError) {
@@ -51,22 +50,15 @@ export function evalMult(src: string, node: TreeCursor): number | Sequence {
 
             // if both are sequences
             if (second instanceof Sequence) {
-
-                let result: Sequence
-                result = new Sequence();
-
-                // loop through each value of first
-                first.forEach(firstValue=>{
-                    // create a sequence of every value in second multiplied by the current firstValue and add it to the result sequence
-                    result.insert(new Sequence(...second.map(secondValue => {return firstValue*secondValue === 0 ? 0 :firstValue*secondValue}  )    ))
-                })
                 
-                // return the sequence of sequences
-                return result;
-               
-                //essentially we are producing a 3d sequence: 
-                //{a(1-n)}*{b(1-n)} = {{b1*a1,b2*a1,...,bn*a1},...,{b1*an,b2*an,...,bn*an}}
-                // thanks to how sequences work this results in a single sequence with every possible outcome, which will be desplayed as the probability of each unique outcome
+                // Calculate the Cartesian product to generate every pair of factors
+                return new Sequence(...cross(
+                    first, second, (a, b) => {
+                        // Then multiply each pair
+                        const product = a * b
+                        return product === 0 ? 0 : product
+                    }
+                ))
 
             }
 
@@ -75,6 +67,5 @@ export function evalMult(src: string, node: TreeCursor): number | Sequence {
 
     }
     throw new EvaluationError(src, node, "Cannot multiply values that are neither Number nor Sequence.")
-
 
 }

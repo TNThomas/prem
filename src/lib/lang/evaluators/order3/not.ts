@@ -12,7 +12,7 @@ export function evalNot(src: string, node: TreeCursor): number| Sequence{
     */
 
 
-    let child: number | Sequence
+    let child: number | Sequence | undefined
 
     //set node to the first child
     if (node.firstChild()) {
@@ -40,13 +40,12 @@ export function evalNot(src: string, node: TreeCursor): number| Sequence{
 
             // using the Sequence funcion Map on child, we provide a function that will be used on each value in child, 
             // the Map function will use this function on every value in the sequence of child and return a sequencce of the results
-
             return new Sequence(...child.map(value => value === 0 ? 1 : 0))
                 
         } 
     }
-        // if it is not a number or sequence we throw an error saying we cannot perform 
-        throw new ErrorNodeError(src, node, "Cannot perform a Not Operator on a value that is neither Number nor Sequence.")
+    // if it is not a number or sequence we throw an error saying we cannot perform 
+    throw new ErrorNodeError(src, node, "Cannot perform a Not Operator on a value that is neither Number nor Sequence.")
 
 }
 
