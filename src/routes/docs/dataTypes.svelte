@@ -1,6 +1,6 @@
 <h4>Numbers</h4>
 <section><p>
-    Currently, PREM only supports non-negative integers in the input. Negation and division are on the roadmap, and will enable all rational numbers when they are implemented.
+    Currently, PREM only supports whole numbers in the input. Division is on the roadmap, and will enable all rational numbers when it implemented.
 </p></section>
 <h4>Sequences</h4>
 <section>

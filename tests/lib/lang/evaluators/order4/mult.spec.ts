@@ -44,12 +44,12 @@ describe( "evalMultExpression", () => {
     })
 
 
-    test("disallows incomplete equation", () => {
+    test("Disallows incomplete equation", () => {
         const result = () => evalProgram("output 1*")
         expect(result).toThrow()
     })
 
-    test("multiplys sequences", () => {
+    test("Multiplies sequences", () => {
         const result = evalProgram("output 2* {0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144}")
         expect(result).toEqual([
             {
@@ -59,7 +59,7 @@ describe( "evalMultExpression", () => {
         ])
     })
 
-    test("multiplys sequences with negatives", () => {
+    test("Multiplies sequences with negatives", () => {
         const result = evalProgram("output -1* {0, 1, -2, 3, 5, -8, -13, -21, 34, 55, 79, 134}")
         expect(result).toEqual([
             {
@@ -70,7 +70,7 @@ describe( "evalMultExpression", () => {
     })
 
 
-    test("multiplys multiple sequences", () => {
+    test("Multiplies multiple sequences", () => {
         const result = evalProgram("output 1d4*1d4")
         expect(result).toEqual([
             {
@@ -90,7 +90,7 @@ describe( "evalMultExpression", () => {
         ])
     })
 
-    test("multiplys multiple sequences with negative values", () => {
+    test("Multiplies multiple sequences with negative values", () => {
         const result = evalProgram("output {-1,-2,3,4}*{0,1,-2,-3}")
         expect(result).toEqual([
             {
@@ -105,6 +105,5 @@ describe( "evalMultExpression", () => {
             }
         ])
     })
-
 
 })
