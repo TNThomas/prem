@@ -12,21 +12,35 @@
 output -{-1, 2, -3} as "{1, -2, 3}"</pre>
 
 </section>
-<h4>Multiplication</h4>
+<h4>Math Operators </h4>
 <section>
     <p>
-        PREM allows you to multiply numbers using the <code>*</code> operator.
+        PREM allows you to multiply numbers using the <code>*</code> operator, 
+        and divide with <code>/</code>.
     </p>
     <p>
         For ordinary math, this looks like you'd expect:
     </p>
-    <pre>output 2 * 2 as "4"</pre>
-    <p> You can multiply each result of a Sequence, Dice, or Cards like this:</p>
+    <pre>output 2 * 2 as "4"
+output 3/4 as "0.75"</pre>
+
+    <p> You can multiply or divide each result of a Sequence, Dice, or Cards like this:</p>
     <pre>output 2 * d6 as "Not the same as 2d6"
-output 3 * {1, 2, 3} as "{3, 6, 9}"</pre>
+output 3 * {1, 2, 3} as "{3, 6, 9}"
+output {1, 2, 3} / 2 as "{0.5, 1, 1.5}"</pre>
 
     <p>
-        You can also multiply two Sequences, Dice, or Cards together to get the products of all possible pairs:
+        You can also operate on two Sequences, Dice, or Cards to get the result of applying the operator
+        to all possible pairs:
     </p>
-    <pre>output 1d2 * {1, 2, 3} as "{1, 2, 3, 2, 4, 6}"</pre>
+    <pre>output 1d2 * {1, 2, 3} as "{1, 2, 3, 2, 4, 6}"
+output {1, 2, 3} / 1d2 as "{1, 2, 3, 0.5, 1, 1.5}"</pre>
+
+</section>
+<h4>Order of Operations</h4>
+<section>
+    <p>
+        PREM obeys the following mathematical order of operations, moving from left to right at each step.
+        Parentheses are processed first, followed by negation, then multiplication and division.
+    </p>
 </section>
