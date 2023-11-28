@@ -5,6 +5,7 @@ import { evalOrder3 } from '../order3'
 import { evalMult } from './mult'
 import { evalDiv } from './div'
 
+
 export function evalOrder4(
     src: string,
     node: TreeCursor

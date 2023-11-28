@@ -85,14 +85,14 @@ describe( "evalNegativeExpression", () => {
                     -4,       // 2d4 = 2, 2
                     -4, -4,   // 2d4 = 1, 3    
                     -3, -3,   // 2d4 = 1, 2
-                    -2      // 2d4 = 1, 1
+                    -2        // 2d4 = 1, 1
                 ]
             }
         ])
     })
 
     test("negates the number of faces on a die", () => {
-        const result = evalProgram("output d-4")
+        const result = evalProgram("output d(-4)")
         expect(result).toEqual([
             {
                 name: "Output",
@@ -139,7 +139,7 @@ describe( "evalNegativeExpression", () => {
     })
 
     test("negates the number of faces in a deck", () => {
-        const result = evalProgram("output c-4")
+        const result = evalProgram("output c(-4)")
         expect(result).toEqual([
             {
                 name: "Output",

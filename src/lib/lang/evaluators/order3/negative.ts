@@ -1,18 +1,18 @@
 import type { TreeCursor } from '@lezer/common'
 import { Sequence } from "$lib/lang/dataStructures"
 import { ErrorNodeError, EvaluationError } from ".."
-import { evalOrder1 } from "../order1"
+import { evalOrder2 } from "../order2"
 
 export function evalNegative(
     src: string,
     node: TreeCursor
 ): number | Sequence {
-    let result: number | Sequence
+    let result: number | Sequence | undefined
     if (node.firstChild()) {
         if (node.type.isError) {
             throw new ErrorNodeError(src, node)
         }
-        result = evalOrder1(src, node)
+        result = evalOrder2(src, node)
         node.parent()
     }
     if (typeof result !== undefined) {
