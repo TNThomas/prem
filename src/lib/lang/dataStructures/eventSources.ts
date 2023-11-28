@@ -36,13 +36,16 @@ export class DependentEventSource implements EventSource {
     getEvents(numEvents: number, overflow = false): Sequence[] {
         if (numEvents === 0) return []
         const possibilityIndices = range(this.possibleEvents.length)
+        // Track possibility space and used events with indices
         let eventIndices = possibilityIndices.map(idx => [idx])
         for (let i = 1; i < Math.abs(numEvents); ++i) {
             const usedIndexSets = eventIndices
             eventIndices = []
             usedIndexSets.forEach( (usedIndices) => {
+                // Figure out the possibility space for this event based on prior events
                 let remainingIndices = [...difference(possibilityIndices, usedIndices)]
                 if (overflow && remainingIndices.length === 0) {
+                    // Reset possibility space if we run out
                     remainingIndices = possibilityIndices
                 }
                 eventIndices = eventIndices.concat(remainingIndices.map(
