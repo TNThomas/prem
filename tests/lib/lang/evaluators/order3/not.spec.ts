@@ -80,7 +80,7 @@ describe( "evalNotExpression", () => {
         expect(() => evalProgram("output !")).toThrowError()
     })
 
-    test("Not functions while within paranthesies", () => {
+    test("Not functions while within parentheses", () => {
         const result = evalProgram("output (!1)d6")
         expect(result).toEqual([
             {
@@ -90,7 +90,7 @@ describe( "evalNotExpression", () => {
         ])
     })
 
-    test("Not functions with dice within paranthesies", () => {
+    test("Not functions with dice within parentheses", () => {
         const result = evalProgram("output !(1d6)")
         expect(result).toEqual([
             {
@@ -101,12 +101,12 @@ describe( "evalNotExpression", () => {
     })
 
     //!1d6 is parsed the same way as (!1)d6
-    test("Not functions with dice without paranthesies", () => {
+    test("Not functions with dice without parentheses", () => {
         const result = evalProgram("output !1d6")
         expect(result).toEqual([
             {
                 name: "Output",
-                value: []
+                value: [0,0,0,0,0,0]
             }
         ])
     })
