@@ -2,7 +2,7 @@
 export const
   Program = 1,
   OutputExpression = 2,
-  Not = 8,
-  Num = 13,
-  Negative = 14,
+  Not = 7,
+  Negative = 8,
+  Num = 12,
   Str = 21

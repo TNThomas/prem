@@ -9,5 +9,5 @@ export type ResultType = {
 
 export type Collation = {
     name: string,
-    data: Map<number | string, number>
+    data: Map<number, number>
 }

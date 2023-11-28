@@ -1,30 +1,34 @@
 <script lang="ts">
-	import { onMount, setContext } from "svelte";
-	import { siteTheme } from ".";
-	import { readable } from "svelte/store";
-    
+	import { afterUpdate } from "svelte";
+	import { baseTheme, type EditorColors, type Theme } from ".";
+	    
+	export let theme: Theme = baseTheme
 	export let global = false
     export let darkMode = false
 
-	let theme = readable(darkMode ? siteTheme.dark : siteTheme.light)
-    setContext("theme", $theme)
+	$: _theme = darkMode ? theme.dark : theme.light
 
-	onMount(() => {
+	afterUpdate(() => {
 		if (global) {
-			document.body.style.backgroundColor = $theme.bg
-			document.body.style.color = $theme.text
+			document.body.style.backgroundColor = _theme.bg
+			document.body.style.color = _theme.text
 		}
 	})
 </script>
 
 <div id="themedContent"
-		style:--theme-color-bg={$theme.bg}
-		style:--theme-color-text={$theme.text}
-		style:--theme-color-line={$theme.line}
-		style:--theme-color-box={$theme.box}
-		style:--theme-color-active={$theme.active}
-		style:--theme-color-link={$theme.link}
-		style:--theme-color-visited={$theme.visited}
+		style:--theme-color-bg={_theme.bg}
+		style:--theme-color-text={_theme.text}
+		style:--theme-color-line={_theme.line}
+		style:--theme-color-box={_theme.box}
+		style:--theme-color-active={_theme.active}
+		style:--theme-color-link={_theme.link}
+		style:--theme-color-visited={_theme.visited}
+
+		style:--theme-editor-kw={_theme.editor?.kw}
+		style:--theme-editor-num={_theme.editor?.num}
+		style:--theme-editor-str={_theme.editor?.str}
+		style:--theme-editor-bracket={_theme.editor?.bracket}
 >
 	<slot/>
 </div>

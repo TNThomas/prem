@@ -1,6 +1,6 @@
 <script lang="ts">
     import { page } from '$app/stores';
-	import { prefersDark,  ThemeContext } from "$lib/themes";
+	import { prefersDark, DarkToggle, ThemeContext, sakuraTheme } from "$lib/themes";
     import changeLog from "./changeLogs/changes.json"
 
     let darkMode = $prefersDark
@@ -16,11 +16,12 @@
     <title>{$page.data.title || "PREM"}</title>
 </svelte:head>
 
-<ThemeContext {darkMode} global={true}>
+<ThemeContext theme={sakuraTheme} {darkMode} global={true}>
     <header>
         <div id="siteTitle">
             <h1>PREM</h1>
             <p id="subtitle">The Physical Randomness Experiment Modeler</p>
+            <DarkToggle bind:isDark={darkMode}></DarkToggle>
         </div>
         <nav> {#each Object.entries(pages) as appPage}
             <a href={appPage[1]} class:here={appPage[1] === $page.url.pathname}>{appPage[0]}</a>

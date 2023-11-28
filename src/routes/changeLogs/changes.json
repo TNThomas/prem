@@ -1,5 +1,15 @@
 [
     {
+        "id": "0.5",
+        "date": "2023-11-28",
+        "changes": [
+            "Add Not, Negative, Multiplication, and Division",
+            "Fix swapped At Least and At Most collations",
+            "Add dark mode toggle",
+            "Improve color contrast in Dark Mode"
+        ]
+    },
+    {
         "id": "0.4",
         "date": "2023-09-17",
         "changes": [

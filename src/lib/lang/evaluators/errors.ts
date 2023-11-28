@@ -4,9 +4,11 @@ import type { TreeCursor } from '@lezer/common'
  * Base class for all errors raised by evaluation
  */
 export class EvaluationError extends Error {
+    src: string
     constructor(src: string, node: TreeCursor, message?: string) {
-        const msg = `Failed to evaluate ${node.type.name} expression "${src.slice(node.from, node.to)}"`
-        super(msg + (message || "."))
+        const msg = `Failed to evaluate ${node.type.name} expression "${src.slice(node.from, node.to)}."`
+        super(msg + ((" " + message) || ""))
+        this.src = src
     }
 }
 
@@ -17,6 +19,12 @@ export class ErrorNodeError extends EvaluationError {
     constructor(src: string, node: TreeCursor, detail?: string) {
         const errText = src.slice(node.from, node.to)
         node.parent()
-        super(src, node, ` at ${errText}` + (detail || "."))
+        super(src, node, ` at ${errText}. ` + detail)
+    }
+}
+
+export class DivZeroError extends Error {
+    constructor() {
+        super("Cannot divide by zero.");
     }
 }
