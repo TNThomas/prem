@@ -22,3 +22,9 @@ export class ErrorNodeError extends EvaluationError {
         super(src, node, ` at ${errText}. ` + detail)
     }
 }
+
+export class DivZeroError extends Error {
+    constructor() {
+        super("Cannot divide by zero.");
+    }
+}
