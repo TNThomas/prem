@@ -26,32 +26,28 @@ export function evalMult(src: string, node: TreeCursor): number | Sequence {
     }
 
     if (first !== undefined && second !== undefined) {
-
-        // if the first one is just a number
-        if (typeof first === "number") {
-            if ( typeof second === "number") {
-                // Multiply, accounting for Javascript's -0
-                return first*second === 0 ? 0 :first*second;
-            }
-            // if the first is a number and the second is a sequence, create a new sequence using map where every value in second is multiplied by first  
-            first = new Sequence(first)
+        // Return a Num when both inputs are Nums
+        if (typeof first === "number" && typeof second === "number") {
+            return multiply(first, second)
         }
 
+        // Ensure first is a sequence so we can do sequence stuff
+        first = typeof first === "number" ? new Sequence(first) : first
+        // Ensure second is a sequence so we can do sequence stuff
         second = typeof second === "number" ? new Sequence(second) : second
-                
-        // Calculate the Cartesian product to generate every pair of factors
+
+        // Calculate the Cartesian product to generate every pair of factors, multiplying as we go
         return new Sequence(...cross(
             first,
             second,
-            (a, b) => {
-                // Then multiply each pair
-                const product = a * b
-                return product === 0 ? 0 : product
-            }
+            multiply
         ))
-
-
     }
     throw new EvaluationError(src, node, "Cannot multiply values that are neither Number nor Sequence.")
 
+}
+
+function multiply(a: number, b: number) {
+    const product = a * b
+    return product === 0 ? 0 : product
 }
