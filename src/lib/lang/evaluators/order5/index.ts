@@ -1,4 +1,3 @@
-
 import type { TreeCursor } from '@lezer/common'
 import type { Sequence } from '$lib/lang/dataStructures'
 import { evalOrder4 } from '../order4'
