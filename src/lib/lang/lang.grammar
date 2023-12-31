@@ -1,12 +1,8 @@
-@top Program { OutputExpression+ }
+@top Program { space? OutputExpression+ }
 
 @skip { lineComment | blockComment }
 
-@precedence {
-     spacedOp @left, comparison @left, equality @left
-}
-
-OutputExpression { "output" space orderLast (space "as" space Str)? }
+OutputExpression { "output" space orderLast (space "as" space Str)? space? }
 
 @skip {"\n"} {
     Str { '"' strContent* '"' }
@@ -43,8 +39,6 @@ order3 {
 Not { "!" (Negative | order2) }
 
 Negative { "-" (Not | order2) }
-
-spaceBefore<expr> { space? expr }
 
 order4 {
     Mult { order3 ~binaryExp space? "*" space? order4 }
