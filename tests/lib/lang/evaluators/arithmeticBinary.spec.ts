@@ -1,9 +1,10 @@
 import { describe, expect, test } from "vitest";
 import { evalProgram } from "$lib/lang/evaluators";
 
-describe( "evalMultExpression", () => {
-
-    test("Multiplies numbers by zero", () => {
+// Test evalArithmeticBinary using multiplication, since the operator function is just (a,b) => a*b
+describe( "evalArithmeticBinary", () => {
+    
+    test("operates on zero", () => {
         const result = evalProgram("output 0*2")
         expect(result).toEqual([
             {
@@ -13,7 +14,7 @@ describe( "evalMultExpression", () => {
         ])
     })
 
-    test("Multiplies nonzero numbers", () => {
+    test("operates on nonzero numbers", () => {
         const result = evalProgram("output 2*2")
         expect(result).toEqual([
             {
@@ -23,7 +24,7 @@ describe( "evalMultExpression", () => {
         ])
     })
 
-    test("Multiplies negative numbers", () => {
+    test("operates on negative numbers", () => {
         const result = evalProgram("output 2*-2")
         expect(result).toEqual([
             {
@@ -33,7 +34,7 @@ describe( "evalMultExpression", () => {
         ])
     })
 
-    test("Multiplies negative numbers by zero", () => {
+    test("operates on negatives with zero", () => {
         const result = evalProgram("output 0*-2")
         expect(result).toEqual([
             {
@@ -44,12 +45,12 @@ describe( "evalMultExpression", () => {
     })
 
 
-    test("Disallows incomplete equation", () => {
+    test("disallows incomplete equations", () => {
         const result = () => evalProgram("output 1*")
         expect(result).toThrow()
     })
 
-    test("Multiplies sequences", () => {
+    test("distributes operations over sequences", () => {
         const result = evalProgram("output 2* {0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144}")
         expect(result).toEqual([
             {
@@ -59,7 +60,7 @@ describe( "evalMultExpression", () => {
         ])
     })
 
-    test("Multiplies sequences with negatives", () => {
+    test("distributes operations over sequences with positives, negatives, and zero", () => {
         const result = evalProgram("output -1* {0, 1, -2, 3, 5, -8, -13, -21, 34, 55, 79, 134}")
         expect(result).toEqual([
             {
@@ -70,7 +71,7 @@ describe( "evalMultExpression", () => {
     })
 
 
-    test("Multiplies multiple sequences", () => {
+    test("distributes operations across sequences on both sides of the operator", () => {
         const result = evalProgram("output 1d4*1d4")
         expect(result).toEqual([
             {
@@ -90,7 +91,7 @@ describe( "evalMultExpression", () => {
         ])
     })
 
-    test("Multiplies multiple sequences with negative values", () => {
+    test("distributes operations across sequences on both sides of the operator when positive, negative, and zero values are present", () => {
         const result = evalProgram("output {-1,-2,3,4}*{0,1,-2,-3}")
         expect(result).toEqual([
             {
