@@ -9,10 +9,12 @@ export function evalUnary(
     operator: (a: number) => number,
 ): number | Sequence {
     let childVal: number | Sequence | undefined
+    let childType = ""
     if (node.firstChild()) {
         if (node.type.isError) {
             throw new ErrorNodeError(src, node)
         }
+        childType = node.type.name
         childVal = evalOrder2(src, node)
         node.parent()
     }
@@ -24,5 +26,5 @@ export function evalUnary(
             return new Sequence(...childVal.map(value => applyOperator(operator, value)))
         }
     }
-    throw new EvaluationError(src, node, "Cannot negate a value that is neither Number nor Sequence.")
+    throw new EvaluationError(src, node, `Cannot apply unary operations to a ${childType}.`)
 }
