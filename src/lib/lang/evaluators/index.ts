@@ -1,9 +1,9 @@
-import { evalOrder4 } from "./order4"
+import { evalOrder5 } from "./order5"
 
 export * from "./errors"
 export { evalProgram } from "./program"
 
-export const evalOrderLast = evalOrder4
+export const evalOrderLast = evalOrder5
 
 export function applyOperator(
     operator: (...operands: number[]) => number,
