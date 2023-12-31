@@ -35,7 +35,10 @@ output {1, 2, 3} / 2 as "{0.5, 1, 1.5}"</pre>
     </p>
     <pre>output 1d2 * {1, 2, 3} as "{1, 2, 3, 2, 4, 6}"
 output {1, 2, 3} / 1d2 as "{1, 2, 3, 0.5, 1, 1.5}"</pre>
-
+    <p>
+        You can also get the remainder of a division by using the <code>%</code> operator, like so:
+    </p>
+    <pre>output {1, 2, 3} % 1d2 as "{0, 1, 0, 0, 1, 0}"</pre>
 </section>
 <h4>Order of Operations</h4>
 <section>
