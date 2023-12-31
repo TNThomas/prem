@@ -32,9 +32,21 @@ export function evalOrder4(
             } catch (error) {
                 throw new EvaluationError(src, node, error instanceof Error ? error.message : undefined)
             }
+        case "Mod":
+            try {
+                return evalArithmeticBinary(
+                    src,
+                    node,
+                    modOperator,
+                    evalOrder3,
+                    evalOrder4
+                )
+            } catch (error) {
+                throw new EvaluationError(src, node, error instanceof Error ? error.message : undefined)
+            }
         default:
             return evalOrder3(src, node)
-        }
+    }
 }
 
 function divOperator(a: number, b: number) : number {
@@ -42,4 +54,11 @@ function divOperator(a: number, b: number) : number {
         throw new DivZeroError()
     }
     return a/b
+}
+
+function modOperator(a: number, b: number) : number {
+    if (b === 0) {
+        throw new DivZeroError()
+    }
+    return a%b
 }
