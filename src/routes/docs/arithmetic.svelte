@@ -8,8 +8,8 @@
     </p>
     <pre>output -(-42) as "42"</pre>
     <p>Negating Dice, Cards, or a Sequence negates each element of the result:</p>
-    <pre>output -1d6 as "{-6, -5, -4, -3, -2, -1}"
-output -{-1, 2, -3} as "{1, -2, 3}"</pre>
+    <pre>output -1d6 as "&lbrace;-6, -5, -4, -3, -2, -1&rbrace;"
+output -&lbrace;-1, 2, -3&rbrace; as "&lbrace;1, -2, 3&rbrace;"</pre>
 
 </section>
 <h4>Math Operators </h4>
@@ -27,17 +27,17 @@ output 1+1 as "2"
 output 6 - 9 as "-3"</pre>
 
     <p> Mathematical operations distribute across Sequences, Dice, or Cards like this:</p>
-    <pre>output 3 * {1, 2, 3} as "{3, 6, 9}"</pre>
+    <pre>output 3 * &lbrace;1, 2, 3&rbrace; as "&lbrace;3, 6, 9&rbrace;"</pre>
 
     <p>
         You can also operate on two Sequences, Dice, or Cards to get the result of applying the operator
         to all possible pairs:
     </p>
-    <pre>output {1, 2} * {1, 2, 3} as "{1, 2, 3, 2, 4, 6}"</pre>
+    <pre>output &lbrace;1, 2&rbrace; * &lbrace;1, 2, 3&rbrace; as "&lbrace;1, 2, 3, 2, 4, 6&rbrace;"</pre>
     <p>
         You can get the remainder of a division by using the <code>%</code> modulo operator, like so:
     </p>
-    <pre>output {1, 2, 3} % 1d2 as "{0, 1, 0, 0, 1, 0}"</pre>
+    <pre>output &lbrace;1, 2, 3&rbrace; % 1d2 as "&lbrace;0, 1, 0, 0, 1, 0&rbrace;"</pre>
 </section>
 <h4>Order of Operations</h4>
 <section>
