@@ -47,41 +47,41 @@ Negative { "-" (Not | order2) }
 spaceBefore<expr> { space? expr }
 
 order4 {
-    Mult { order3 spaceBefore<"*" space? order4> }
+    Mult { order3 ~binaryExp space? "*" space? order4 }
     |
-    Div { order3 spaceBefore<"/" space? order4> }
+    Div { order3 ~binaryExp space? "/" space? order4 }
     |
-    Mod { order3 spaceBefore<"%" space? order4> }
+    Mod { order3 ~binaryExp space? "%" space? order4 }
     |
-    order3 !spacedOp
+    order3 ~binaryExp
 }
 
 order5 {
-    Add { order4 spaceBefore<"+" space? order5> }
+    Add { order4 ~binaryExp space? "+" space? order5 }
     |
-    Sub { order4 spaceBefore<"-" space? order5> }
+    Sub { order4 ~binaryExp space? "-" space? order5 }
     |
-    order4 !spacedOp
+    order4 ~binaryExp
 }
 
 order6 {
-    IsGreater { order5 !comparison space? ">" space? order5 }
+    IsGreater { order5 ~binaryExp space? ">" space? order5 }
     |
-    IsLess { order5 !comparison space? "<" space? order5 }
+    IsLess { order5 ~binaryExp space? "<" space? order5 }
     |
-    IsGreaterEq { order5 !comparison space? ">=" space? order5 }
+    IsGreaterEq { order5 ~binaryExp space? ">=" space? order5 }
     |
-    IsLessEq { order5 !comparison space? "<=" space? order5 }
+    IsLessEq { order5 ~binaryExp space? "<=" space? order5 }
     |
-    order5 !spacedOp
+    order5 ~binaryExp
 }
 
 order7 {
-    Eq { order6 !equality space? "==" space? order6 }
+    Eq { order6 ~binaryExp space? "==" space? order6 }
     |
-    Neq { order6 !equality space? "!=" space? order6 }
+    Neq { order6 ~binaryExp space? "!=" space? order6 }
     |
-    order6 !spacedOp
+    order6 ~binaryExp
 }
 
 orderLast { order7 }

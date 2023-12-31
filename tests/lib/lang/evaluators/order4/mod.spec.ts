@@ -18,7 +18,7 @@ describe( "evalModExpression", () => {
     })
 
     test("computes remainder of dividing nonzero numbers evenly", () => {
-        const result = evalProgram("output 2%2")
+        const result = evalProgram("output 2 % 2")
         expect(result).toEqual([
             {
                 name: "Output",

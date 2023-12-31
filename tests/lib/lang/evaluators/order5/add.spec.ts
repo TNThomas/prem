@@ -14,7 +14,7 @@ describe( "evalAddExpression", () => {
     })
 
     test("adds nonzero numbers", () => {
-        const result = evalProgram("output 2+2")
+        const result = evalProgram("output 2 + 2")
         expect(result).toEqual([
             {
                 name: "Output",
