@@ -1,5 +1,14 @@
 [
     {
+        "id": "1.0",
+        "date": "2023-12-31",
+        "changes": [
+            "Support Modulo, Addition, and Subtraction operators",
+            "Support Less Than, Greater Than, Less Than or Equal, and Greater Than or Equal operators",
+            "Fix errors caused by whitespace in user input"
+        ]
+    }
+    {
         "id": "0.5",
         "date": "2023-11-28",
         "changes": [
