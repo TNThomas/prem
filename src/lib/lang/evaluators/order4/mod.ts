@@ -34,22 +34,21 @@ export function evalMod(src: string, node: TreeCursor): number | Sequence {
             }
 
             if (typeof first === "number") {
-                return first%second === 0 ? 0 :first%second;
+                // instead of using JS's mod (which dosnt work properly in all cases) we have instead created a mod function which we pas the values
+                return mod(first,second) === 0 ? 0 :mod(first,second);
             }
             if (first instanceof Sequence) {
-                return new Sequence(...first.map(value => value%(second as number)  === 0 ? 0 : value%(second as number) ))
+                return new Sequence(...first.map(value => mod(value,(second as number))  === 0 ? 0 : mod(value,(second as number)) ))
             }
         }
 
         if (second instanceof Sequence) {
-            // i tried to come up with a way where this checking would be done within the map, but i kept having issues
-            // this solution is much easier to implament, though i think its less efficent
             second.forEach(value=>{ if (value===0){
                 throw new EvaluationError(src, node, "Zero Found in Sequence: Cannot Divide by Zero.")
             }})
 
             if (typeof first === "number") {
-                return new Sequence(...second.map(value => (first as number)%value === 0 ? 0 : (first as number)%value ))
+                return new Sequence(...second.map(value => mod((first as number),value) === 0 ? 0 : mod((first as number),value) ))
             }
 
             if (first instanceof Sequence) {
@@ -58,8 +57,8 @@ export function evalMod(src: string, node: TreeCursor): number | Sequence {
 
                 // loop through each value of first
                 first.forEach(firstValue=>{
-                    // create a sequence of every value in second multiplied by the current firstValue and add it to the result sequence
-                    result.insert(new Sequence(...second.map(secondValue => {return firstValue%secondValue === 0 ? 0 :firstValue%secondValue}  )    ))
+                    // create a sequence of every value in second modded by the current firstValue and add it to the result sequence
+                    result.insert(new Sequence(...second.map(secondValue => {return mod(firstValue,secondValue) === 0 ? 0 :mod(firstValue,secondValue)}  )    ))
                 })
                 
                 // return the sequence of sequences
@@ -71,4 +70,9 @@ export function evalMod(src: string, node: TreeCursor): number | Sequence {
     throw new EvaluationError(src, node, "Cannot divide values that are neither Number nor Sequence.")
 
 
+}
+
+// this mod function here exists becaue JavaScript Mod doesnt work like actual Math mod when it comes to negative numbers
+function mod(n:number, m:number){
+    return ((n%m)+m)%m;
 }
