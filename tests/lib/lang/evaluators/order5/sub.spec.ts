@@ -14,7 +14,7 @@ describe( "evalSubExpression", () => {
     })
 
     test("subtracts nonzero numbers", () => {
-        const result = evalProgram("output 1-2")
+        const result = evalProgram("output 1 - 2")
         expect(result).toEqual([
             {
                 name: "Output",

@@ -10,7 +10,7 @@ describe( "evalGreaterThanExpression", () => {
             [1, 1, 0],
             [4, 2, 1]
         ]) {
-            const result = evalProgram(`output ${left}>${right}`)
+            const result = evalProgram(`output ${left} > ${right}`)
             expect(result).toEqual([
                 {
                     name: "Output",
