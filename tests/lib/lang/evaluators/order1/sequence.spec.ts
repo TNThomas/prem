@@ -13,6 +13,16 @@ describe( "evalSequence", () => {
         ])
     })
 
+    test("Allows spaces in basic syntax", () => {
+        const actual = evalProgram("output { 3, 2, 1 }")
+        expect(actual).toEqual([
+            {
+                name: "Output",
+                value: [1, 2, 3]
+            }
+        ])
+    })
+
     test("flattens composed Sequences", () => {
         const actual = evalProgram("output {1, 1, 2, 3, 5, 8, {1, 3}}")
         expect(actual).toEqual([

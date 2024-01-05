@@ -3,11 +3,12 @@ import { evalProgram } from "$lib/lang/evaluators";
 
 describe( "evalModExpression", () => {
 
-    test("does not mod numbers by zero", () => {
+
+    test("does not divide numbers by zero", () => {
         const result = () => evalProgram("output 2%0")
         expect(result).toThrowError()
     })
-    test("mods zero by numbers", () => {
+    test("computes remainder of dividing zero by numbers", () => {
         const result = evalProgram("output 0%2")
         expect(result).toEqual([
             {
@@ -17,8 +18,9 @@ describe( "evalModExpression", () => {
         ])
     })
 
-    test("mods nonzero numbers", () => {
-        const result = evalProgram("output 2%2")
+
+    test("computes remainder of dividing nonzero numbers evenly", () => {
+        const result = evalProgram("output 2 % 2")
         expect(result).toEqual([
             {
                 name: "Output",
@@ -26,6 +28,7 @@ describe( "evalModExpression", () => {
             }
         ])
     })
+
 
 
     test("2 mod 4 = 2", () => {
@@ -69,9 +72,28 @@ describe( "evalModExpression", () => {
     })
 
 
+    test("computes remainder of dividing nonzero numbers unevenly", () => {
+        const result = evalProgram("output 5%2")
+        expect(result).toEqual([
+            {
+                name: "Output",
+                value: [1]
+            }
+        ])
+    })
 
-    test("mod divisor can be negative numbers", () => {
+    test("computes remainder of dividing negative numbers evenly", () => {
         const result = evalProgram("output 4%-2")
+        expect(result).toEqual([
+            {
+                name: "Output",
+                value: [0]
+            }
+        ])
+    })
+
+    test("computes remainder of dividing zero by negative numbers", () => {
+        const result = evalProgram("output 0%-2")
         expect(result).toEqual([
             {
                 name: "Output",
@@ -95,13 +117,24 @@ describe( "evalModExpression", () => {
         expect(result).toThrow()
     })
 
-    test("does not divide values by sequences that contain zero", () => {
-        const result = () => evalProgram("output 2%{0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144}")
-        expect(result).toThrow()
-        
+
+
+    test("computes remainder of dividing negative numbers unevenly", () => {
+        const result = evalProgram("output 5%-3")
+        expect(result).toEqual([
+            {
+                name: "Output",
+                value: [2]
+            }
+        ])
     })
 
-    test("mods values by sequences", () => {
+    test("rejects division by sequences containing zero", () => {
+        const result = () => evalProgram("output 2%{0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144}")
+        expect(result).toThrow()
+    })
+
+    test("computes remainder of dividing values by sequences", () => {
         const result = evalProgram("output 20%{ 2, 2, 4, 5, 16, 20, 40}")
 
         expect(result).toEqual([
@@ -112,7 +145,8 @@ describe( "evalModExpression", () => {
         ])
     })
 
-    test("mods sequences by values", () => {
+
+    test("computes remainder of dividing sequences by values", () => {
         const result = evalProgram("output { 2, 2, 4, 6, 10, 16, 26, 42, 68, 110, 178, 288}%2")
 
         expect(result).toEqual([
@@ -124,7 +158,7 @@ describe( "evalModExpression", () => {
     })
 
 
-    test("mods sequences by negatives", () => {
+    test("computes remainder of dividing sequences by negatives", () => {
         const result = evalProgram("output {0, 1, -2, 3, 5, -8, -13, -21, 34, 55, 79, 134}%-2")
         expect(result).toEqual([
             {
@@ -135,7 +169,7 @@ describe( "evalModExpression", () => {
     })
 
 
-    test("mods multiple sequences", () => {
+    test("computes remainder of dividing multiple sequences", () => {
         const result = evalProgram("output 1d4%1d4")
         expect(result).toEqual([
             {
@@ -166,6 +200,7 @@ describe( "evalModExpression", () => {
             }
         ])
     })
+
 
 
 })

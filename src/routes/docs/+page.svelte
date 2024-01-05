@@ -4,11 +4,15 @@
 	import TypeCoersion from "./typeCoersion.svelte";
 	import ExtraNav from "$lib/extraNav.svelte";
 	import Details from "$lib/details.svelte";
+	import BooleanLogic from "./booleanLogic.svelte";
+	import Arithmetic from "./arithmetic.svelte";
 
     const sections: [name: string, component: any][] = [
         ["Interface", Interface],
         ["Data Types", DataTypes],
-        ["Type Coersion", TypeCoersion]
+        ["Type Coersion", TypeCoersion],
+        ["Boolean Logic", BooleanLogic],
+        ["Arithmetic", Arithmetic]
     ]
 </script>
 
@@ -30,6 +34,10 @@
 <style>
     h2 {
         margin-top: 0;
+    }
+
+    article :global(section) {
+        padding-left: 0.5em;
     }
 
     article :global(section) {

@@ -18,7 +18,7 @@ describe( "evalDivExpression", () => {
     })
 
     test("divides nonzero numbers", () => {
-        const result = evalProgram("output 2/2")
+        const result = evalProgram("output 2 / 2")
         expect(result).toEqual([
             {
                 name: "Output",
@@ -48,16 +48,19 @@ describe( "evalDivExpression", () => {
     })
 
 
+
     test("disallows incomplete equation", () => {
         const result = () => evalProgram("output 1/")
         expect(result).toThrow()
     })
+
 
     test("does not divide values by sequences that contain zero", () => {
         const result = () => evalProgram("output 2/{0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144}")
         expect(result).toThrow()
         
     })
+
 
     test("divides values by sequences", () => {
         const result = evalProgram("output 20/{ 2, 2, 4, 5, 16, 20, 40}")

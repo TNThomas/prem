@@ -24,6 +24,34 @@ describe( "evalParenExpression", () => {
         ])
     })
 
+    test("Allows spaces in basic syntax", () => {
+        const result1 = evalProgram("output ( 1 )")
+        expect(result1).toEqual([
+            {
+                name: "Output",
+                value: [1]
+            }
+        ])
+        const result2 = evalProgram("output ( 2d4 )")
+        expect(result2).toEqual([
+            {
+                name: "Output",
+                value: [
+                    2,      // 2d4 = 1, 1
+                    3, 3,   // 2d4 = 1, 2
+                    4, 4,   // 2d4 = 1, 3
+                    4,      // 2d4 = 2, 2
+                    5, 5,   // 2d4 = 1, 4
+                    5, 5,   // 2d4 = 2, 3
+                    6, 6,   // 2d4 = 2, 4
+                    6,      // 2d4 = 3, 3
+                    7, 7,   // 2d4 = 1, 3
+                    8       // 2d4 = 4, 4
+                ]
+            }
+        ])
+    })
+
     test("Overrides default precedence", () => {
         const result = evalProgram("output 1d(2d4)")
         expect(result).toEqual([
@@ -80,7 +108,7 @@ describe( "evalParenExpression", () => {
 
     // we currently throw an evaluator error in the case that the output is empty
     test("Throws an EvaluatorError if there's nothing between the parentheses", () => {
-        let actual = () => evalProgram("output ()")
+        const actual = () => evalProgram("output ()")
         expect(actual).toThrowError()
     })
 
