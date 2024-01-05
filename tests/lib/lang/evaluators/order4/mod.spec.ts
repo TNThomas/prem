@@ -186,7 +186,7 @@ describe( "evalModExpression", () => {
 
     test("mod functions on multiple sequences with negative values", () => {
         const result = evalProgram("output {-1,-2,3,4}%{1,-2,-3,4}")
-        ///-2, -2, -1, -1, -1, 0, 0,  0,  0,  0,  0, 0, 0,  1,  1,  3
+        
         expect(result).toEqual([
             {
                 name: "Output",

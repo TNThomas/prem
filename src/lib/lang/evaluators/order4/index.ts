@@ -59,5 +59,5 @@ function modOperator(a: number, b: number) : number {
     if (b === 0) {
         throw new DivZeroError()
     }
-    return a%b
+    return ((a%b)+b)%b;
 }
