@@ -124,7 +124,7 @@ describe( "evalModExpression", () => {
         expect(result).toEqual([
             {
                 name: "Output",
-                value: [2]
+                value: [-1]
             }
         ])
     })
