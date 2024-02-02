@@ -4,7 +4,6 @@ import { evalOrder3 } from '../order3'
 import { evalArithmeticBinary } from '../arithmeticBinary'
 import { DivZeroError, EvaluationError } from '../errors'
 
-
 export function evalOrder4(
     src: string,
     node: TreeCursor
@@ -12,6 +11,7 @@ export function evalOrder4(
 
     switch (node.type.name) {
         case "Mult":
+
             return evalArithmeticBinary(
                 src,
                 node,
@@ -59,5 +59,5 @@ function modOperator(a: number, b: number) : number {
     if (b === 0) {
         throw new DivZeroError()
     }
-    return a%b
+    return ((a%b)+b)%b;
 }
