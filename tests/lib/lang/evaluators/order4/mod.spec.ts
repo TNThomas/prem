@@ -31,7 +31,7 @@ describe( "evalModExpression", () => {
 
 
 
-    test("2 mod 4 = 2", () => {
+    test("computes the remainder of divisions with a quotient of zero", () => {
         const result = evalProgram("output 2%4")
         expect(result).toEqual([
             {
@@ -41,7 +41,7 @@ describe( "evalModExpression", () => {
         ])
     })
 
-    test("-1 mod 4 = 3", () => {
+    test("computes remainder of divisions of negative dividends", () => {
         const result = evalProgram("output -1%4")
         expect(result).toEqual([
             {
@@ -51,22 +51,22 @@ describe( "evalModExpression", () => {
         ])
     })
 
-    test("-2 mod 4 = 2", () => {
-        const result = evalProgram("output -2%4")
+    test("computes remainder of divisions of negative dividends that have a higher absolute value than the divisor", () => {
+        const result = evalProgram("output -7%4")
         expect(result).toEqual([
             {
                 name: "Output",
-                value: [2]
+                value: [1]
             }
         ])
     })
 
-    test("-10 mod 16 = 6", () => {
-        const result = evalProgram("output -10%16")
+    test("computes remainder of divisions where both the dividend and the divisor are negative", () => {
+        const result = evalProgram("output -10%-16")
         expect(result).toEqual([
             {
                 name: "Output",
-                value: [6]
+                value: [-10]
             }
         ])
     })
@@ -93,16 +93,6 @@ describe( "evalModExpression", () => {
     })
 
     test("computes remainder of dividing zero by negative numbers", () => {
-        const result = evalProgram("output 0%-2")
-        expect(result).toEqual([
-            {
-                name: "Output",
-                value: [0]
-            }
-        ])
-    })
-
-    test("mods zero by negative numbers", () => {
         const result = evalProgram("output 0%-2")
         expect(result).toEqual([
             {
@@ -184,7 +174,7 @@ describe( "evalModExpression", () => {
         ])
     })
 
-    test("mod functions on multiple sequences with negative values", () => {
+    test("computes remainder of dividing multiple sequences with negative values", () => {
         const result = evalProgram("output {-1,-2,3,4}%{1,-2,-3,4}")
         
         expect(result).toEqual([
