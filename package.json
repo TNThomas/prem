@@ -1,6 +1,6 @@
 {
 	"name": "prem",
-	"version": "0.0.1",
+	"version": "1.1.0",
 	"private": true,
 	"scripts": {
 		"dev": "npm run build:lang && vite dev",

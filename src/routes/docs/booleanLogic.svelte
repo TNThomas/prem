@@ -51,7 +51,7 @@ output 3 &gt; 2 as "1"</pre>
             </tr>
             <tr>
                 <td>Greater Than or Equal</td>
-                <td><code>&lgt;=</code></td>
+                <td><code>&gt;=</code></td>
                 <td>
                     <pre>output 1 &gt;= 2 as "0"
 output 2 &gt;= 2 as "1"
@@ -60,7 +60,7 @@ output 3 &gt;= 2 as "1"</pre>
             </tr>
             <tr>
                 <td>Equal</td>
-                <td><code>&lgt;=</code></td>
+                <td><code>==</code></td>
                 <td>
                     <pre>output 1 == 2 as "0"
 output 2 == 2 as "1"
