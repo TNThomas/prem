@@ -19,7 +19,9 @@ output !-1 as "0"</pre>
     <p>The following comparison operators express the relationship between two numbers. The result is <code>1</code> if the indicated relationship is true, and <code>0</code> otherwise.</p>
     <table>
         <thead>
-            <th>Comparison</th> <th>Operator</th> <th>Examples</th>
+            <tr>
+                <th>Comparison</th> <th>Operator</th> <th>Examples</th>
+            </tr>
         </thead>
         <tbody>
             <tr>
