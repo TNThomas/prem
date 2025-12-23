@@ -1,4 +1,6 @@
+
 import { evalOrder7 } from "./order7"
+
 
 export * from "./errors"
 export { evalProgram } from "./program"
@@ -12,3 +14,4 @@ export function applyOperator(
     const result = operator(...operands)
     return result === 0 ? 0 : result
 }
+
